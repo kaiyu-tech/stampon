@@ -1,0 +1,25 @@
+require: rubocop-rails
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - vendor/**/*
+    - spec/fixtures/**/*
+    - tmp/**/*
+    - .git/**/*
+    - bin/*
+    - db/schema.rb
+  SuggestExtensions: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Metrics/MethodLength:
+  CountComments: false
+  Max: 20
+
+Metrics/AbcSize:
+  Max: 20
