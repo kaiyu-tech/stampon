@@ -1,0 +1,28 @@
+<% now = Time.current %>
+
+mark0:
+  user: admin
+  message: message0
+  title: 'title_0'
+  note: 'note_0'
+  read: false
+  created_at: <%= now %>
+  updated_at: <%= now %>
+
+message1:
+  user: user1
+  message: message2
+  title: 'title_1'
+  note: 'note_1'
+  read: false
+  created_at: <%= now + 1.minute %>
+  updated_at: <%= now + 1.minute %>
+
+message2:
+  user: user2
+  message: message1
+  title: 'title_2'
+  note: 'note_2'
+  read: false
+  created_at: <%= now + 2.minute %>
+  updated_at: <%= now + 2.minute %>
