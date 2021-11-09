@@ -1,0 +1,47 @@
+name: test
+on: [ pull_request ]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      TZ: ${{ secrets.TZ }}
+      LANG: ${{ secrets.LANG }}
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: yarn install
+        run: yarn install --check-files
+      - name: Setup test DB & Run tests
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DISCORD_CLIENT_ID: ${{ secrets.DISCORD_CLIENT_ID }}
+          DISCORD_CLIENT_SECRET: ${{ secrets.DISCORD_CLIENT_SECRET }}
+          DISCORD_REDIRECT_URI: ${{ secrets.DISCORD_REDIRECT_URI }}
+          DISCORD_SCOPE: ${{ secrets.DISCORD_SCOPE }}
+          DISCORD_GUILD_ID: ${{ secrets.DISCORD_GUILD_ID }}
+          STAMPON_API_TOKEN: ${{ secrets.STAMPON_API_TOKEN }}
+        run: |
+          bundle exec rails db:setup
+          bundle exec rails test:system
+      - name: Archive screenshot
+        if: failure()
+        uses: actions/upload-artifact@v1
+        with:
+          name: Screenshot of the test
+          path: tmp/screenshots
