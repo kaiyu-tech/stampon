@@ -1,9 +1,6 @@
 {
   "name": "stampon",
   "private": true,
-  "engines": {
-    "node": "16.13.0"
-  },
   "scripts": {
     "format": "prettier --write app/javascript",
     "lint": "eslint --fix app/javascript",
