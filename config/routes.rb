@@ -2,4 +2,5 @@
 
 Rails.application.routes.draw do
   root 'sessions#new'
+  get '/main' => 'marks#main'
 end
