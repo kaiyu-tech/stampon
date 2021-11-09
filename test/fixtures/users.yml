@@ -1,0 +1,31 @@
+<% now = Time.current %>
+
+admin:
+  discord_id: <%= Faker::Number.number(:digits => 18) %>
+  name: 'admin'
+  discriminator: <%= Faker::Number.number(:digits => 4) %>
+  avatar: <%= Faker::Number.hexadecimal(:digits => 32) %>
+  admin: true
+  in_use: true
+  created_at: <%= now %>
+  updated_at: <%= now %>
+
+user1:
+  discord_id: <%= Faker::Number.number(:digits => 18) %>
+  name: 'user_1'
+  discriminator: <%= Faker::Number.number(:digits => 4) %>
+  avatar: <%= Faker::Number.hexadecimal(:digits => 32) %>
+  admin: false
+  in_use: true
+  created_at: <%= now + 1.minute %>
+  updated_at: <%= now + 1.minute %>
+
+user2:
+  discord_id: <%= Faker::Number.number(:digits => 18) %>
+  name: 'user_2'
+  discriminator: <%= Faker::Number.number(:digits => 4) %>
+  avatar: <%= Faker::Number.hexadecimal(:digits => 32) %>
+  admin: false
+  in_use: true
+  created_at: <%= now + 2.minute %>
+  updated_at: <%= now + 2.minute %>

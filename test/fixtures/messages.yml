@@ -1,0 +1,25 @@
+<% now = Time.current %>
+
+message0:
+  channel_id: <%= Faker::Number.number(:digits => 18) %>
+  content_id: <%= Faker::Number.number(:digits => 18) %>
+  content: 'content_0'
+  user: admin
+  created_at: <%= now %>
+  updated_at: <%= now %>
+
+message1:
+  channel_id: <%= Faker::Number.number(:digits => 18) %>
+  content_id: <%= Faker::Number.number(:digits => 18) %>
+  content: 'content_1'
+  user: user1
+  created_at: <%= now + 1.minute %>
+  updated_at: <%= now + 1.minute %>
+
+message2:
+  channel_id: <%= Faker::Number.number(:digits => 18) %>
+  content_id: <%= Faker::Number.number(:digits => 18) %>
+  content: 'content_2'
+  user: user2
+  created_at: <%= now + 2.minute %>
+  updated_at: <%= now + 2.minute %>
