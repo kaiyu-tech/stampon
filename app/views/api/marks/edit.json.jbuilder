@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
-json.user 'api/users/user', user: @user
+json.user do
+  json.partial! "api/users/user", user: @user
+end
 
-json.mark 'api/marks/mark', mark: @mark
+json.mark do
+  json.partial! "api/marks/mark", mark: @mark
+end
