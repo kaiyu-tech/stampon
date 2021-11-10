@@ -1,22 +1,16 @@
 <template>
   <div id="app">
-    <p>{{ message }}</p>
+    <MainPage />
   </div>
 </template>
 
 <script>
+import MainPage from './components/MainPage.vue'
+
 export default {
-  data: function () {
-    return {
-      message: 'Hello Vue!'
-    }
+  name: 'App',
+  components: {
+    MainPage
   }
 }
 </script>
-
-<style scoped>
-p {
-  font-size: 2em;
-  text-align: center;
-}
-</style>
