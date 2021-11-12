@@ -45,8 +45,8 @@ class Api::MarksController < ApplicationController
   private
 
   def mark_params
-    params.require(:discord).permit(:channel_id, :content_id, :user_id, :user_name, :user_avatar,
-                                    :author_id, :author_name, :author_avatar, :content)
+    params.require(:discord).permit(:channel_id, :content_id, :user_id, :user_name, :user_discriminator, :user_avatar,
+                                    :author_id, :author_name, :author_discriminator, :author_avatar, :content)
   end
 
   def author(mark_params)
