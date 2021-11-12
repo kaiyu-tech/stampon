@@ -52,7 +52,7 @@ class Api::MarksController < ApplicationController
   def author(mark_params)
     User.find_or_create_by!(discord_id: mark_params[:author_id]) do |v|
       v.name = mark_params[:author_name]
-      v.discriminator = me[:author_discriminator]
+      v.discriminator = mark_params[:author_discriminator]
       v.avatar = mark_params[:author_avatar]
       v.admin = false
       v.in_use = false
