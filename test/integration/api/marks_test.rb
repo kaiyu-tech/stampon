@@ -25,7 +25,7 @@ class Api::MarksTest < ActionDispatch::IntegrationTest
                             author_display_name: 'author_nickname',
                             author_avatar: Faker::Number.hexadecimal(digits: 32),
                             content: 'これはすごい有益な情報🐣を含んだ発言です。',
-                            wrote_at: Time.current } }
+                            wrote_at: Time.current.strftime('%s%L') } }
   end
 
   test 'GET /api/marks with token' do

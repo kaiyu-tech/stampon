@@ -69,7 +69,7 @@ class Api::MarksController < ApplicationController
       v.channel_id = mark_params[:channel_id]
       v.content_id = mark_params[:content_id]
       v.content = mark_params[:content]
-      v.wrote_at = Time.zone.at(mark_params[:wrote_at] / 1000)
+      v.wrote_at = Time.zone.at(mark_params[:wrote_at].to_i / 1000.0)
       v.user = author
     end
   end
