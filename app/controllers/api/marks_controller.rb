@@ -2,7 +2,7 @@
 
 class Api::MarksController < ApplicationController
   before_action :authentication_required
-  protect_from_forgery except: %i[create destroy]
+  protect_from_forgery except: :create
 
   def index
     @user = User.find(current_user)

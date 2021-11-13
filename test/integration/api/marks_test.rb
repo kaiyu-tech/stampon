@@ -51,9 +51,7 @@ class Api::MarksTest < ActionDispatch::IntegrationTest
   end
 
   test 'DELETE /api/marks/:id' do
-    assert_difference 'Mark.count', -1 do
-      delete api_mark_path(@user.marks.first.id), params: nil, headers: { 'Authorization' => "Bearer #{@api_token}" }
-      assert_response :success
-    end
+    delete api_mark_path(@user.marks.first.id), params: nil, headers: { 'Authorization' => "Bearer #{@api_token}" }
+    assert_response :unauthorized
   end
 end

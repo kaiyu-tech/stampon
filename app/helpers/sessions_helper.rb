@@ -30,7 +30,7 @@ module SessionsHelper
   end
 
   def authenticate
-    action_name.in?(%w[create destroy]) &&
+    action_name == 'create' &&
       authenticate_with_http_token do |token, _options|
         ActiveSupport::SecurityUtils.secure_compare(token, stampon_api_token)
       end
