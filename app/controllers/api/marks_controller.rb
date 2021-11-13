@@ -48,7 +48,7 @@ class Api::MarksController < ApplicationController
     params.require(:discord).permit(:channel_id, :content_id, :user_id, :user_name, :user_discriminator,
                                     :user_display_name, :user_avatar,
                                     :author_id, :author_name, :author_discriminator, :author_display_name,
-                                    :author_avatar, :content)
+                                    :author_avatar, :content, :wrote_at)
   end
 
   def author(mark_params)
@@ -69,6 +69,7 @@ class Api::MarksController < ApplicationController
       v.channel_id = mark_params[:channel_id]
       v.content_id = mark_params[:content_id]
       v.content = mark_params[:content]
+      v.wrote_at = Time.zone.at(mark_params[:wrote_at].to_i / 1000.0)
       v.user = author
     end
   end
