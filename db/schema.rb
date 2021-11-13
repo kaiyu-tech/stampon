@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2021_11_09_144948) do
     t.bigint "discord_id", null: false
     t.string "name", null: false
     t.string "discriminator", null: false
+    t.string "display_name", null: false
     t.string "avatar", null: false
     t.boolean "admin", default: false, null: false
     t.boolean "in_use", default: false, null: false

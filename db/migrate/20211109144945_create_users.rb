@@ -6,6 +6,7 @@ class CreateUsers < ActiveRecord::Migration[6.1]
       t.bigint :discord_id, null: false
       t.string :name, null: false
       t.string :discriminator, null: false
+      t.string :display_name, null: false
       t.string :avatar, null: false
       t.boolean :admin, null: false, default: false
       t.boolean :in_use, null: false, default: false

@@ -31,7 +31,7 @@
         :src="avatars_url(mark.author.id, mark.author.avatar)"
         width="20"
         height="20" />
-      {{ mark.author.name }} | {{ mark.discord.content }} |
+      {{ mark.author.display_name }} | {{ mark.discord.content }} |
       <button @click="editClick(mark.id)">編集</button>
       <button @click="deleteClick(mark.id)">削除</button>
     </li>

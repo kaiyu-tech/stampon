@@ -11,6 +11,7 @@ end
 
 json.author do
   json.name mark.message.user.name
+  json.display_name mark.message.user.display_name
   json.id mark.message.user.discord_id.to_s
   json.avatar mark.message.user.avatar
 end
