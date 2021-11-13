@@ -24,7 +24,8 @@ class Api::MarksTest < ActionDispatch::IntegrationTest
                             author_discriminator: Faker::Number.number(digits: 4),
                             author_display_name: 'author_nickname',
                             author_avatar: Faker::Number.hexadecimal(digits: 32),
-                            content: 'これはすごい有益な情報🐣を含んだ発言です。' } }
+                            content: 'これはすごい有益な情報🐣を含んだ発言です。',
+                            wrote_at: Time.current } }
   end
 
   test 'GET /api/marks with token' do

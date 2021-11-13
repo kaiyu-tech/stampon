@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 2021_11_09_144948) do
     t.bigint "channel_id", null: false
     t.bigint "content_id", null: false
     t.text "content", null: false
+    t.datetime "wrote_at", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

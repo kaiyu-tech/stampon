@@ -21,6 +21,7 @@ admin = User.create!(discord_id: Faker::Number.number(digits: 18),
 message = Message.create!(channel_id: Faker::Number.number(digits: 18),
                           content_id: Faker::Number.number(digits: 18),
                           content: 'content',
+                          wrote_at: now,
                           user: admin,
                           created_at: now,
                           updated_at: now)
@@ -64,6 +65,7 @@ messages = []
   messages << Message.create!(channel_id: Faker::Number.number(digits: 18),
                               content_id: Faker::Number.number(digits: 18),
                               content: "content_#{n + 1}",
+                              wrote_at: now + n.minutes,
                               user: authors[n],
                               created_at: now + n.minutes,
                               updated_at: now + n.minutes)
