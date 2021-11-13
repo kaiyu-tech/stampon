@@ -45,14 +45,17 @@ class Api::MarksController < ApplicationController
   private
 
   def mark_params
-    params.require(:discord).permit(:channel_id, :content_id, :user_id, :user_name, :user_discriminator, :user_avatar,
-                                    :author_id, :author_name, :author_discriminator, :author_avatar, :content)
+    params.require(:discord).permit(:channel_id, :content_id, :user_id, :user_name, :user_discriminator,
+                                    :user_display_name, :user_avatar,
+                                    :author_id, :author_name, :author_discriminator, :author_display_name,
+                                    :author_avatar, :content)
   end
 
   def author(mark_params)
     User.find_or_create_by!(discord_id: mark_params[:author_id]) do |v|
       v.name = mark_params[:author_name]
       v.discriminator = mark_params[:author_discriminator]
+      v.display_name = mark_params[:user_display_name]
       v.avatar = mark_params[:author_avatar]
       v.admin = false
       v.in_use = false

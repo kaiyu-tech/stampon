@@ -5,7 +5,7 @@
         :src="avatars_url(mark.author.id, mark.author.avatar)"
         width="20"
         height="20" />
-      {{ mark.author.name }}
+      {{ mark.author.display_name }}
     </div>
     <div>title(option): <input v-model="title" placeholder="title" /></div>
     <div>content: {{ mark.discord.content }}</div>
