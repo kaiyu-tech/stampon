@@ -52,14 +52,16 @@ class Api::MarksController < ApplicationController
   end
 
   def author(mark_params)
-    User.find_or_create_by!(discord_id: mark_params[:author_id]) do |v|
+    author = User.find_or_create_by!(discord_id: mark_params[:author_id]) do |v|
       v.name = mark_params[:author_name]
       v.discriminator = mark_params[:author_discriminator]
-      v.display_name = mark_params[:user_display_name]
+      v.display_name = mark_params[:author_name]
       v.avatar = mark_params[:author_avatar]
       v.admin = false
       v.in_use = false
     end
+    author.update!(display_name: mark_params[:author_display_name]) if mark_params[:author_display_name]
+    author
   end
 
   def message(mark_params, author)
