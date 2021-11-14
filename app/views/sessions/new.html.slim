@@ -1,2 +1,47 @@
-h1 Discord Bot
-= link_to 'Login', url, class: 'btn login-btn'
+css:
+    body {
+        background-color: #f8f5f2;
+        color: #222525;
+        width: 100%;
+        margin-right: auto;
+        margin-left: auto;
+        text-align: center;
+        margin: 3.0em 0 0 0;
+        font-size: 1.05em;
+        line-height: 2.0em;
+        letter-spacing: 0.08em;
+    }
+
+    .login-btn {
+        font-size: 1.15em;
+        font-weight: 700;
+        line-height: 1.5;
+        position: relative;
+        display: inline-block;
+        padding: 0.8em 3em;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-transition: all 0.3s;
+        transition: all 0.3s;
+        text-align: center;
+        vertical-align: middle;
+        text-decoration: none;
+        letter-spacing: 0.1em;
+        border-radius: 0.5em;
+        background-color: #078080;
+        color: #ffffff;
+        margin: 1.0em;
+    }
+
+= image_tag 'logo.svg', size: '280x280', alt: 'StamPon'
+
+.content
+  p
+    |「すたんぽん」は、Discordの発言をブックマークするサービスです。<br>
+      ブックマークしたい発言に「<b><font color=#f45d48>気になる</font></b>」か「<font size=5.0em>👀</font>」スタンプを押すことで自動登録します。<br>
+      ブックマークしたい発言は本サイトで検索や削除することが出来ます。
+
+= link_to 'ログイン', url, class: 'btn login-btn'
