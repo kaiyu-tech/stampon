@@ -14,7 +14,7 @@ class MarksTest < ApplicationSystemTestCase
     ApplicationController.stub_any_instance :session, @session do
       visit main_path
 
-      assert_equal 'Stampon', title
+      assert_equal 'StamPon', title
 
       assert_text 'user_2'
       assert_text 'content_2'
@@ -26,9 +26,9 @@ class MarksTest < ApplicationSystemTestCase
   test 'Failure list view test with MarksPage component' do
     visit main_path
 
-    assert_equal 'Stampon', title
-    assert_text 'Discord Bot'
-    assert_text 'Login'
+    assert_equal 'StamPon', title
+    assert_text 'すたんぽん'
+    assert_text 'ログイン'
   end
 
   test 'Success test transition to MarkPage component' do
@@ -37,7 +37,7 @@ class MarksTest < ApplicationSystemTestCase
 
       click_button '編集'
 
-      assert_equal 'Stampon', title
+      assert_equal 'StamPon', title
       assert_text 'user_2'
       assert_text 'content_2'
       assert_text '更新'
@@ -74,7 +74,7 @@ class MarksTest < ApplicationSystemTestCase
     ApplicationController.stub_any_instance :session, @session do
       visit main_path
 
-      assert_equal 'Stampon', title
+      assert_equal 'StamPon', title
       assert_text 'user_2'
       assert_text 'content_2'
 
