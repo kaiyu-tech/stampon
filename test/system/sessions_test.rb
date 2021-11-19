@@ -7,10 +7,10 @@ class SessionsTest < ApplicationSystemTestCase
     visit root_path
     assert_equal 'StamPon', title
     assert_link 'ログイン', href: 'https://discord.com/oauth2/authorize?' \
-                               "client_id=#{ENV['DISCORD_CLIENT_ID']}&" \
-                               "redirect_uri=#{CGI.escape(ENV['DISCORD_REDIRECT_URI'])}&" \
-                               'response_type=code&' \
-                               "scope=#{ENV['DISCORD_SCOPE']}"
+                              "client_id=#{ENV['DISCORD_CLIENT_ID']}&" \
+                              "redirect_uri=#{CGI.escape(ENV['DISCORD_REDIRECT_URI'])}&" \
+                              'response_type=code&' \
+                              "scope=#{ENV['DISCORD_SCOPE']}"
     click_link 'ログイン'
     assert_text 'メールアドレスまたは電話番号'
     assert_text 'パスワード'

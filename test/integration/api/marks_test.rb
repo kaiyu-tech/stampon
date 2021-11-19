@@ -11,21 +11,24 @@ class Api::MarksTest < ActionDispatch::IntegrationTest
 
     @session = { user_id: @user.id }
 
-    @discord_params = { discord:
-                          { channel_id: Faker::Number.number(digits: 18),
-                            content_id: Faker::Number.number(digits: 18),
-                            user_id: @user.discord_id,
-                            user_name: @user.name,
-                            user_discriminator: @user.discriminator,
-                            user_display_name: @user.display_name,
-                            user_avatar: @user.avatar,
-                            author_id: Faker::Number.number(digits: 18),
-                            author_name: 'author',
-                            author_discriminator: Faker::Number.number(digits: 4),
-                            author_display_name: 'author_nickname',
-                            author_avatar: Faker::Number.hexadecimal(digits: 32),
-                            content: 'これはすごい有益な情報🐣を含んだ発言です。',
-                            wrote_at: Time.current.strftime('%s%L') } }
+    @discord_params = discord_params
+  end
+
+  def discord_params
+    { discord: { channel_id: Faker::Number.number(digits: 18),
+                 content_id: Faker::Number.number(digits: 18),
+                 user_id: @user.discord_id,
+                 user_name: @user.name,
+                 user_discriminator: @user.discriminator,
+                 user_display_name: @user.display_name,
+                 user_avatar: @user.avatar,
+                 author_id: Faker::Number.number(digits: 18),
+                 author_name: 'author',
+                 author_discriminator: Faker::Number.number(digits: 4),
+                 author_display_name: 'author_nickname',
+                 author_avatar: Faker::Number.hexadecimal(digits: 32),
+                 content: 'これはすごい有益な情報🐣を含んだ発言です。',
+                 wrote_at: Time.current.strftime('%s%L') } }
   end
 
   test 'GET /api/marks with token' do
