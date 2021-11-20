@@ -12,7 +12,7 @@ export default {
       this.scheme = 'android-app://com.discord/https/'
     } else {
       // windows, mac
-      this.scheme = 'android-app://com.discord/https/'
+      this.scheme = 'discord://'
     }
   },
   methods: {
@@ -20,7 +20,7 @@ export default {
       return `https://cdn.discordapp.com/avatars/${id}/${avatar}.png`
     },
     channels_url(guild_id, channel_id, content_id, app) {
-      let scheme = 'https'
+      let scheme = 'https://'
       if (app == true) scheme = this.scheme
       return `${scheme}discord.com/channels/${guild_id}/${channel_id}/${content_id}`
     }
