@@ -15,16 +15,30 @@
             :search="search"
             @click:row="editClick">
             <template #[`item.channels_url`]="{ item }">
-              <a :href="item.channels_url" target="_blank">
+              <v-btn
+                icon
+                :href="item.channels_url"
+                target="_blank"
+                @click.stop
+                class="v-btn__link">
                 <img src="assets/chrome.png" width="30" height="30" />
-              </a>
-              <a :href="item.discord_url" target="_blank">
+              </v-btn>
+
+              <v-btn
+                icon
+                :href="item.discord_url"
+                target="_blank"
+                @click.stop
+                class="v-btn__link">
                 <img src="assets/discord.png" width="30" height="30" />
-              </a>
+              </v-btn>
             </template>
             <template #[`item.name`]="{ item }">
               <img :src="item.avatars_url" width="30" height="30" />
               {{ item.name }}
+            </template>
+            <template #[`item.text`]="{ item }">
+              {{ item.title ? item.title : item.content }}
             </template>
             <template #[`item.delete`]="{ item }">
               <v-btn small color="error" @click.stop="deleteClick(item)">
@@ -52,20 +66,28 @@ export default {
         {
           text: 'リンク',
           value: 'channels_url',
-          sortable: false
+          sortable: false,
+          width: '11%'
         },
         {
-          text: '名前',
-          value: 'name'
+          text: '投稿者',
+          value: 'name',
+          width: '15%'
         },
         {
           text: '内容',
-          value: 'content'
+          value: 'text'
+        },
+        {
+          text: '投稿日時',
+          value: 'wrote_at',
+          width: '10%'
         },
         {
           text: '',
           value: 'delete',
-          sortable: false
+          sortable: false,
+          width: '8%'
         }
       ],
       items: []
@@ -79,7 +101,7 @@ export default {
           mark.discord.guild_id,
           mark.discord.channel_id,
           mark.discord.content_id,
-          true
+          false
         ),
         discord_url: this.channels_url(
           mark.discord.guild_id,
@@ -89,9 +111,11 @@ export default {
         ),
         avatars_url: this.avatars_url(mark.author.id, mark.author.avatar),
         name: mark.author.display_name,
+        title: mark.title.slice(0, 50) + (mark.title.length > 50 ? '...' : ''),
         content:
           mark.discord.content.slice(0, 50) +
-          (mark.discord.content.length > 50 ? '...' : '')
+          (mark.discord.content.length > 50 ? '...' : ''),
+        wrote_at: mark.discord.wrote_at
       }
     })
   },

@@ -7,6 +7,7 @@ json.discord do
   json.channel_id mark.message.channel_id.to_s
   json.content_id mark.message.content_id.to_s
   json.content mark.message.content
+  json.wrote_at mark.message.wrote_at.strftime('%y/%m/%d %H:%M')
 end
 
 json.author do

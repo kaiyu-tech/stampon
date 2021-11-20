@@ -20,3 +20,6 @@ img {
 .v-btn__avatar {
     margin: 0 10px !important;
 }
+.v-btn__link {
+    margin-right: 5px !important;
+}
