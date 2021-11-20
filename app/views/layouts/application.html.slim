@@ -9,7 +9,4 @@ html
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   body
-    .container
-      - flash.each do |key, value|
-        = content_tag(:div, value, class: "alert alert-#{key}")
     = yield
