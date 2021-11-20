@@ -1,18 +1,32 @@
 <template>
-  <div>
-    <div>
-      <img
-        :src="avatars_url(mark.author.id, mark.author.avatar)"
-        width="20"
-        height="20" />
-      {{ mark.author.display_name }}
-    </div>
-    <div>title(option): <input v-model="title" placeholder="title" /></div>
-    <div>content: {{ mark.discord.content }}</div>
-    <div>note(option): <input v-model="note" placeholder="note" /></div>
-    <button @click="updateClick">更新</button>
-    <button @click="cancelClick">キャンセル</button>
-  </div>
+  <v-row justify="center">
+    <v-col>
+      <v-card>
+        <v-card-title>
+          <img
+            :src="avatars_url(mark.author.id, mark.author.avatar)"
+            width="50"
+            height="50" />
+          {{ mark.author.display_name }}
+        </v-card-title>
+        <v-card-text>
+          <v-text-field v-model="title" label="タイトル(任意)"></v-text-field>
+          <v-textarea
+            v-model="content"
+            label="内容"
+            filled
+            readonly></v-textarea>
+          <v-textarea v-model="note" label="ノート(任意)"></v-textarea>
+        </v-card-text>
+        <v-divider></v-divider>
+        <v-card-actions>
+          <v-btn color="error" @click="cancelClick"> キャンセル </v-btn>
+          <v-spacer></v-spacer>
+          <v-btn color="primary" @click="updateClick"> 更新 </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -25,11 +39,13 @@ export default {
   data() {
     return {
       title: '',
+      content: '',
       note: ''
     }
   },
   mounted() {
     this.title = this.mark.title
+    this.content = this.mark.discord.content
     this.note = this.mark.note
   },
   methods: {

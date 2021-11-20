@@ -1,29 +1,56 @@
 <template>
-  <div>
-    <nav v-if="user">
-      <img :src="avatars_url(user.id, user.avatar)" width="40" height="40" />
+  <div v-if="user">
+    <v-app-bar color="#078080">
+      <v-toolbar-title>StamPon</v-toolbar-title>
+
+      <v-spacer></v-spacer>
+
       {{ user.name }}
-    </nav>
-    <p />
-    <div v-if="marks">
-      <div v-if="main">
-        <div v-if="marks.length > 0">
-          <MarksPage
-            :marks="marks"
-            :user="user"
-            @edit-click="editMark"
-            @delete-click="deleteMark"></MarksPage>
+
+      <v-menu bottom offset-y rounded>
+        <template #activator="{ on }">
+          <v-btn icon v-on="on" class="v-btn__avatar">
+            <img
+              :src="avatars_url(user.id, user.avatar)"
+              width="40"
+              height="40" />
+          </v-btn>
+        </template>
+
+        <v-list>
+          <v-list-item v-for="item in items" :key="item" link>
+            <v-list-item-title v-text="item"></v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+    </v-app-bar>
+    <v-main>
+      <v-container>
+        <div v-if="marks">
+          <div v-if="main">
+            <div v-if="marks.length > 0">
+              <MarksPage
+                :marks="marks"
+                :user="user"
+                @edit-click="editMark"
+                @delete-click="deleteMark"></MarksPage>
+            </div>
+            <div v-else>まだデータがありません。</div>
+          </div>
+          <div v-else>
+            <MarkPage
+              :mark="mark"
+              :user="user"
+              @update-click="updateMark"
+              @cancel-click="cancel"></MarkPage>
+          </div>
         </div>
-        <div v-else>まだデータがありません。</div>
-      </div>
-      <div v-else>
-        <MarkPage
-          :mark="mark"
-          :user="user"
-          @update-click="updateMark"
-          @cancel-click="cancel"></MarkPage>
-      </div>
-    </div>
+      </v-container>
+    </v-main>
+    <v-footer color="#078080" absolute>
+      <div class="flex-grow-1"></div>
+      <div>&copy; 2021 kaiyu-tech</div>
+    </v-footer>
   </div>
 </template>
 
@@ -42,6 +69,7 @@ export default {
   },
   data() {
     return {
+      items: ['ログアウト'],
       main: true,
       user: null,
       marks: [],
@@ -82,3 +110,15 @@ export default {
   }
 }
 </script>
+
+<style>
+.v-toolbar__title {
+  margin: 0 10px !important;
+  letter-spacing: 3px !important;
+  font-weight: bold !important;
+}
+
+.v-btn__avatar {
+  margin: 0 10px !important;
+}
+</style>
