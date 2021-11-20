@@ -108,12 +108,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.v-main {
-  margin-bottom: 30px !important;
-}
-.v-data-table {
-  cursor: pointer !important;
-}
-</style>
