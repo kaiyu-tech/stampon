@@ -100,7 +100,7 @@ export default {
       this.$emit('edit-click', item.id)
     },
     deleteClick(item) {
-      if(confirm('削除しますか')){
+      if (confirm('削除しますか')) {
         this.$emit('delete-click', item.id)
         this.items.splice(this.items.indexOf(item), 1)
       }

@@ -35,7 +35,7 @@ class MarksTest < ApplicationSystemTestCase
     ApplicationController.stub_any_instance :session, @session do
       visit main_path
 
-      find(:xpath, '//*[@id="app"]//main//table/tbody/tr[1]/td[3]', :text => 'content_2').click
+      find(:xpath, '//*[@id="app"]//main//table/tbody/tr[1]/td[3]', text: 'content_2').click
 
       assert_field 'タイトル(任意)', with: 'title_1'
       assert_field 'ノート(任意)', with: 'note_1'
@@ -48,7 +48,7 @@ class MarksTest < ApplicationSystemTestCase
     ApplicationController.stub_any_instance :session, @session do
       visit main_path
 
-      find(:xpath, '//*[@id="app"]//main//table/tbody/tr[1]/td[3]', :text => 'content_2').click
+      find(:xpath, '//*[@id="app"]//main//table/tbody/tr[1]/td[3]', text: 'content_2').click
 
       assert_field 'タイトル(任意)', with: 'title_1'
       assert_field 'ノート(任意)', with: 'note_1'
@@ -60,7 +60,7 @@ class MarksTest < ApplicationSystemTestCase
 
       click_button '更新'
 
-      find(:xpath, '//*[@id="app"]//main//table/tbody/tr[1]/td[3]', :text => 'content_2').click
+      find(:xpath, '//*[@id="app"]//main//table/tbody/tr[1]/td[3]', text: 'content_2').click
 
       assert_no_field 'タイトル(任意)', with: 'title_1'
       assert_no_field 'ノート(任意)', with: 'note_1'
