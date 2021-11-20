@@ -14,13 +14,3 @@ export default {
   }
 }
 </script>
-
-<style>
-#app {
-  background-color: #f8f5f2 !important;
-}
-img {
-  object-fit: cover;
-  border-radius: 50%;
-}
-</style>

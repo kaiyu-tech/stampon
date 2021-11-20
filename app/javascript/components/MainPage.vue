@@ -110,15 +110,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.v-toolbar__title {
-  margin: 0 10px !important;
-  letter-spacing: 3px !important;
-  font-weight: bold !important;
-}
-
-.v-btn__avatar {
-  margin: 0 10px !important;
-}
-</style>
