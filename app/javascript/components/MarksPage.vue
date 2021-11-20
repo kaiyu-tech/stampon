@@ -14,7 +14,7 @@
             :items="items"
             :search="search"
             @click:row="editClick">
-            <template #item.channels_url="{ item }">
+            <template #[`item.channels_url`]="{ item }">
               <a :href="item.channels_url" target="_blank">
                 <img src="assets/chrome.png" width="30" height="30" />
               </a>
@@ -22,11 +22,11 @@
                 <img src="assets/discord.png" width="30" height="30" />
               </a>
             </template>
-            <template #item.name="{ item }">
+            <template #[`item.name`]="{ item }">
               <img :src="item.avatars_url" width="30" height="30" />
               {{ item.name }}
             </template>
-            <template #item.delete="{ item }">
+            <template #[`item.delete`]="{ item }">
               <v-btn small color="error" @click.stop="deleteClick(item)">
                 削除
               </v-btn>
