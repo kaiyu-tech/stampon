@@ -12,6 +12,9 @@ module SessionsHelper
   end
 
   def disconnect
+    return unless connected?
+
+    User.find(session[:user_id]).update!(expires_at: nil)
     session.destroy
   end
 
