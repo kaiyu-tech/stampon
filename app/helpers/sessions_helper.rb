@@ -12,9 +12,7 @@ module SessionsHelper
   end
 
   def disconnect
-    return unless connected?
-
-    User.find(session[:user_id]).update!(expires_at: nil)
+    User.find(session[:user_id]).update!(expires_at: nil) if connected?
     session.destroy
   end
 
@@ -29,7 +27,8 @@ module SessionsHelper
   end
 
   def connected?
-    !!session[:user_id] && User.find(session[:user_id]).expires_at > Time.current
+    user = User.find_by(id: session[:user_id])
+    user.present? && user.expires_at > Time.current
   end
 
   def authenticate
