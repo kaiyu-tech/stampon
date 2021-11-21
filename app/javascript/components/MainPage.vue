@@ -18,8 +18,11 @@
         </template>
 
         <v-list>
-          <v-list-item v-for="item in items" :key="item" link>
-            <v-list-item-title v-text="item"></v-list-item-title>
+          <v-list-item
+            v-for="(item, i) in items"
+            :key="i"
+            @click="selectMenu(item)">
+            <v-list-item-title v-text="item.text"></v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
@@ -69,7 +72,7 @@ export default {
   },
   data() {
     return {
-      items: ['ログアウト'],
+      items: [{ text: 'ログアウト' }],
       main: true,
       user: null,
       marks: [],
@@ -106,6 +109,15 @@ export default {
     },
     cancel() {
       this.main = true
+    },
+    selectMenu(item) {
+      switch (item.text) {
+        case 'ログアウト':
+          location.replace('/')
+          break
+        default:
+          return
+      }
     }
   }
 }
