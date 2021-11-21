@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 2021_11_09_144948) do
     t.string "avatar", null: false
     t.boolean "admin", default: false, null: false
     t.boolean "in_use", default: false, null: false
+    t.datetime "expires_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["discord_id"], name: "index_users_on_discord_id", unique: true

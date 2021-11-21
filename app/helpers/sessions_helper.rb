@@ -26,7 +26,7 @@ module SessionsHelper
   end
 
   def connected?
-    !!session[:user_id]
+    !!session[:user_id] && User.find(session[:user_id]).expires_at > Time.current
   end
 
   def authenticate
