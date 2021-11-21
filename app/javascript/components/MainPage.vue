@@ -79,8 +79,13 @@ export default {
       mark: null
     }
   },
-  async created() {
-    await this.fetchMarks()
+  created() {
+    history.pushState(null, null, null)
+    window.addEventListener('popstate', function () {
+      location.reload()
+    })
+
+    this.fetchMarks()
   },
   methods: {
     fetchMarks() {
