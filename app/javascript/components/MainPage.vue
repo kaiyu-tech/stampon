@@ -11,7 +11,7 @@
         <template #activator="{ on }">
           <v-btn icon v-on="on" class="v-btn__avatar">
             <img
-              :src="avatars_url(user.id, user.avatar)"
+              :src="avatars_url(user.discord_id, user.avatar)"
               width="40"
               height="40" />
           </v-btn>
@@ -72,7 +72,7 @@ export default {
   },
   data() {
     return {
-      items: [{ text: 'ログアウト' }],
+      items: [{ text: 'ログアウト' }, { text: 'アカウント削除' }],
       main: true,
       user: null,
       marks: [],
@@ -115,10 +115,16 @@ export default {
     cancel() {
       this.main = true
     },
-    selectMenu(item) {
+    async selectMenu(item) {
       switch (item.text) {
         case 'ログアウト':
           location.replace('/')
+          break
+        case 'アカウント削除':
+          if (confirm('アカウントを削除しますか？')) {
+            await axios.delete(`/api/users/${this.user.id}`)
+            location.replace('/')
+          }
           break
         default:
           return
