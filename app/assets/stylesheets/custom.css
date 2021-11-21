@@ -12,13 +12,11 @@ img {
 .v-data-table {
     cursor: pointer;
 }
-.v-toolbar__title {
-    margin: 0 10px;
-    letter-spacing: 3px;
-    font-weight: bold;
+.img__title {
+    margin-top: 8px;
 }
 .v-btn__avatar {
-    margin: 0 10px;
+    margin: 0 10px !important;
 }
 .v-btn__link {
     margin-right: 5px;

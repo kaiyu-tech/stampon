@@ -1,7 +1,9 @@
 <template>
   <div v-if="user">
     <v-app-bar color="#078080">
-      <v-toolbar-title>StamPon</v-toolbar-title>
+      <v-toolbar-title>
+        <img src="assets/title.svg" height="200" class="img__title" />
+      </v-toolbar-title>
 
       <v-spacer></v-spacer>
 
