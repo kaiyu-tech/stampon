@@ -29,24 +29,19 @@
     </v-app-bar>
     <v-main>
       <v-container>
-        <div v-if="marks">
-          <div v-if="main">
-            <div v-if="marks.length > 0">
-              <MarksPage
-                :marks="marks"
-                :user="user"
-                @edit-click="editMark"
-                @delete-click="deleteMark"></MarksPage>
-            </div>
-            <div v-else>まだデータがありません。</div>
-          </div>
-          <div v-else>
-            <MarkPage
-              :mark="mark"
-              :user="user"
-              @update-click="updateMark"
-              @cancel-click="cancel"></MarkPage>
-          </div>
+        <div v-if="main">
+          <MarksPage
+            :marks="marks"
+            :user="user"
+            @edit-click="editMark"
+            @delete-click="deleteMark"></MarksPage>
+        </div>
+        <div v-else>
+          <MarkPage
+            :mark="mark"
+            :user="user"
+            @update-click="updateMark"
+            @cancel-click="cancel"></MarkPage>
         </div>
       </v-container>
     </v-main>

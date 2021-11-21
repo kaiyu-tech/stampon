@@ -12,8 +12,15 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import App from '../app.vue'
 
+import ja from 'vuetify/es5/locale/ja.js'
+
 Vue.use(Vuetify)
-const vuetify = new Vuetify()
+const vuetify = new Vuetify({
+  lang: {
+    locales: { ja },
+    current: 'ja'
+  }
+})
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({

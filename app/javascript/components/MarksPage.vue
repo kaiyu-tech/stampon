@@ -23,7 +23,6 @@
                 class="v-btn__link">
                 <img src="assets/chrome.png" width="30" height="30" />
               </v-btn>
-
               <v-btn
                 icon
                 :href="item.discord_url"
@@ -38,7 +37,9 @@
               {{ item.name }}
             </template>
             <template #[`item.text`]="{ item }">
-              {{ item.title ? item.title : item.content }}
+              {{
+                item.text.slice(0, 50) + (item.text.length > 50 ? '...' : '')
+              }}
             </template>
             <template #[`item.delete`]="{ item }">
               <v-btn small color="error" @click.stop="deleteClick(item)">
@@ -67,15 +68,15 @@ export default {
           text: 'リンク',
           value: 'channels_url',
           sortable: false,
-          width: '11%'
+          width: '12%'
         },
         {
           text: '投稿者',
           value: 'name',
-          width: '15%'
+          width: '18%'
         },
         {
-          text: '内容',
+          text: '概要',
           value: 'text'
         },
         {
@@ -111,10 +112,7 @@ export default {
         ),
         avatars_url: this.avatars_url(mark.author.id, mark.author.avatar),
         name: mark.author.display_name,
-        title: mark.title.slice(0, 50) + (mark.title.length > 50 ? '...' : ''),
-        content:
-          mark.discord.content.slice(0, 50) +
-          (mark.discord.content.length > 50 ? '...' : ''),
+        text: mark.title ? mark.title : mark.discord.content,
         wrote_at: mark.discord.wrote_at
       }
     })

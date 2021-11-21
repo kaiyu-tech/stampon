@@ -1,5 +1,5 @@
 #app {
-    background-color: #f8f5f2 !important;
+    background-color: #f8f5f2;
 }
 img {
     object-fit: cover;
@@ -7,19 +7,19 @@ img {
 }
 
 .v-main {
-    margin-bottom: 30px !important;
+    margin-bottom: 30px;
 }
 .v-data-table {
-    cursor: pointer !important;
+    cursor: pointer;
 }
 .v-toolbar__title {
-    margin: 0 10px !important;
-    letter-spacing: 3px !important;
-    font-weight: bold !important;
+    margin: 0 10px;
+    letter-spacing: 3px;
+    font-weight: bold;
 }
 .v-btn__avatar {
-    margin: 0 10px !important;
+    margin: 0 10px;
 }
 .v-btn__link {
-    margin-right: 5px !important;
+    margin-right: 5px;
 }
