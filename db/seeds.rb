@@ -15,6 +15,7 @@ admin = User.create!(discord_id: Faker::Number.number(digits: 18),
                      avatar: Faker::Number.hexadecimal(digits: 32),
                      admin: true,
                      in_use: true,
+                     expires_at: nil,
                      created_at: now,
                      updated_at: now)
 
@@ -43,6 +44,7 @@ users = []
                         avatar: Faker::Number.hexadecimal(digits: 32),
                         admin: false,
                         in_use: true,
+                        expires_at: nil,
                         created_at: now + n.minutes,
                         updated_at: now + n.minutes)
 end
@@ -56,6 +58,7 @@ authors = []
                           avatar: Faker::Number.hexadecimal(digits: 32),
                           admin: false,
                           in_use: false,
+                          expires_at: nil,
                           created_at: now + n.minutes,
                           updated_at: now + n.minutes)
 end

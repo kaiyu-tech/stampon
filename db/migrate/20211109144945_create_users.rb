@@ -10,6 +10,7 @@ class CreateUsers < ActiveRecord::Migration[6.1]
       t.string :avatar, null: false
       t.boolean :admin, null: false, default: false
       t.boolean :in_use, null: false, default: false
+      t.timestamp :expires_at, null: true, default: nil
 
       t.timestamps
     end

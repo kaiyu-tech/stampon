@@ -89,7 +89,7 @@ module Discord
       v.discriminator = discord[:me][:discriminator]
       v.avatar = discord[:me][:avatar]
     end
-    user.update!(admin: discord[:guild][:owner], in_use: true)
+    user.update!(admin: discord[:guild][:owner], in_use: true, expires_at: Time.current + ENV['STAMPON_EXPIRES_IN'])
     user
   end
 end

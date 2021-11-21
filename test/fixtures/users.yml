@@ -8,6 +8,7 @@ admin:
   avatar: <%= Faker::Number.hexadecimal(:digits => 32) %>
   admin: true
   in_use: true
+  expires_at: <%= now + ENV['STAMPON_EXPIRES_IN'] %>
   created_at: <%= now %>
   updated_at: <%= now %>
 
@@ -19,6 +20,7 @@ user1:
   avatar: <%= Faker::Number.hexadecimal(:digits => 32) %>
   admin: false
   in_use: true
+  expires_at: <%= now + 1.minute + ENV['STAMPON_EXPIRES_IN'] %>
   created_at: <%= now + 1.minute %>
   updated_at: <%= now + 1.minute %>
 
@@ -30,5 +32,6 @@ user2:
   avatar: <%= Faker::Number.hexadecimal(:digits => 32) %>
   admin: false
   in_use: true
+  expires_at: <%= now + 2.minute + ENV['STAMPON_EXPIRES_IN'] %>
   created_at: <%= now + 2.minute %>
   updated_at: <%= now + 2.minute %>
