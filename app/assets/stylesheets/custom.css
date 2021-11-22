@@ -1,7 +1,7 @@
 #app {
     background-color: #f8f5f2;
 }
-img {
+.img__icon {
     object-fit: cover;
     border-radius: 50%;
 }
@@ -13,13 +13,22 @@ img {
     cursor: pointer;
 }
 .img__title {
-    margin-top: 8px;
+    vertical-align: middle;
+    height: 45px;
 }
 .v-btn__avatar {
-    margin: 0 10px !important;
+    margin-left: 10px !important;
+    margin-right: 5px !important;
 }
 .v-btn__link {
     margin-right: 5px;
+}
+.img__avatar {
+    margin-right: 10px;
+}
+.span__avatar-text {
+    display: inline-block;
+    margin-top: 5px;
 }
 
 .sessions__body {
