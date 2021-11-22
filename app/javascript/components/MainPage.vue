@@ -2,7 +2,7 @@
   <div v-if="user">
     <v-app-bar color="#078080">
       <v-toolbar-title>
-        <img src="assets/title.svg" height="200" class="img__title" />
+        <img src="assets/title.svg" height="50" class="img__title" />
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
@@ -15,7 +15,8 @@
             <img
               :src="avatars_url(user.discord_id, user.avatar)"
               width="40"
-              height="40" />
+              height="40"
+              class="img__icon" />
           </v-btn>
         </template>
 

@@ -21,7 +21,11 @@
                 target="_blank"
                 @click.stop
                 class="v-btn__link">
-                <img src="assets/chrome.png" width="30" height="30" />
+                <img
+                  src="assets/chrome.png"
+                  width="30"
+                  height="30"
+                  class="img__icon" />
               </v-btn>
               <v-btn
                 icon
@@ -29,12 +33,21 @@
                 target="_blank"
                 @click.stop
                 class="v-btn__link">
-                <img src="assets/discord.png" width="30" height="30" />
+                <img
+                  src="assets/discord.png"
+                  width="30"
+                  height="30"
+                  class="img__icon" />
               </v-btn>
             </template>
             <template #[`item.name`]="{ item }">
-              <img :src="item.avatars_url" width="30" height="30" />
-              {{ item.name }}
+              <img
+                :src="item.avatars_url"
+                width="30"
+                height="30"
+                align="left"
+                class="img__icon img__avatar" />
+              <span class="span__avatar-text">{{ item.name }}</span>
             </template>
             <template #[`item.text`]="{ item }">
               {{

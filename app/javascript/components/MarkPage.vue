@@ -6,7 +6,8 @@
           <img
             :src="avatars_url(mark.author.id, mark.author.avatar)"
             width="50"
-            height="50" />
+            height="50"
+            class="img__icon img__avatar" />
           {{ mark.author.display_name }}
         </v-card-title>
         <v-card-text>
