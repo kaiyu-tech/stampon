@@ -98,12 +98,15 @@ class MarksTest < ApplicationSystemTestCase
       assert_text 'すたんぽん'
       assert_text 'ログイン'
 
-      assert user_id, @session[:user_id]
+      assert_nil @session[:user_id]
+      assert User.find(user_id)
     end
   end
 
   test 'Success delete account test' do
     ApplicationController.stub_any_instance :session, @session do
+      user_id = @session[:user_id]
+
       visit main_path
 
       find('#user-icon').click
@@ -114,6 +117,7 @@ class MarksTest < ApplicationSystemTestCase
       assert_text 'ログイン'
 
       assert_nil @session[:user_id]
+      assert_nil User.find_by(id: user_id)
     end
   end
 end
