@@ -83,4 +83,35 @@ class MarksTest < ApplicationSystemTestCase
       assert_no_text 'title_1'
     end
   end
+
+  test 'Success logout test' do
+    ApplicationController.stub_any_instance :session, @session do
+      user_id = @session[:user_id]
+
+      visit main_path
+
+      find('#user-icon').click
+      find('.v-list-item__title', text: 'ログアウト').click
+
+      assert_text 'すたんぽん'
+      assert_text 'ログイン'
+
+      assert user_id, @session[:user_id]
+    end
+  end
+
+  test 'Success delete account test' do
+    ApplicationController.stub_any_instance :session, @session do
+      visit main_path
+
+      find('#user-icon').click
+      find('.v-list-item__title', text: 'アカウント削除').click
+      page.accept_alert
+
+      assert_text 'すたんぽん'
+      assert_text 'ログイン'
+
+      assert_nil @session[:user_id]
+    end
+  end
 end

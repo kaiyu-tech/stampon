@@ -13,7 +13,7 @@ module SessionsHelper
 
   def disconnect
     User.find(session[:user_id]).update!(expires_at: nil) if connected?
-    session.destroy
+    session[:user_id] = nil
   end
 
   def authentication_required
