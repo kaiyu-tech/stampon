@@ -7,7 +7,9 @@ require 'minitest/stub_any_instance'
 class MarksTest < ApplicationSystemTestCase
   setup do
     @user = users(:user1)
+
     @session = { user_id: @user.id }
+    @user.update!(expires_at: Time.current + 3.hours)
   end
 
   test 'Success list view test with MarksPage component' do
