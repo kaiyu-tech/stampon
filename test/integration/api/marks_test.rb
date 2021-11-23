@@ -7,7 +7,7 @@ class Api::MarksTest < ActionDispatch::IntegrationTest
     @user = users(:user1)
 
     @api_token = ENV['STAMPON_API_TOKEN']
-    @invalidapi_token = 'acCeSS_10KEn-uNS10pa61E_tuKE.3Zu'
+    @invalid_api_token = 'acCeSS_10KEn-uNS10pa61E_tuKE.3Zu'
 
     @session = { user_id: @user.id }
     @user.update!(expires_at: Time.current + 3.hours)
