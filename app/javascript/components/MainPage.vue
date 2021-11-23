@@ -16,7 +16,8 @@
               :src="avatars_url(user.discord_id, user.avatar)"
               width="40"
               height="40"
-              class="img__icon" />
+              class="img__icon"
+              id="user-icon" />
           </v-btn>
         </template>
 
