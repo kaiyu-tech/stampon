@@ -132,5 +132,3 @@ npm-debug.log
 yarn-error.log
 
 # End of https://www.toptal.com/developers/gitignore/api/ruby,rails,vuejs
-
-test/integration/api/users_test.rb
