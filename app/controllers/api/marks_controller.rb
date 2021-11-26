@@ -39,7 +39,11 @@ class Api::MarksController < ApplicationController
   end
 
   def destroy
+    message_id = Mark.find(params[:id]).message_id
     Mark.destroy(params[:id])
+    user_id = Message.find(message_id).user_id
+    Message.destroy(message_id) if Mark.find_by(message_id: message_id).nil?
+    User.destroy(user_id) if Message.find_by(user_id: user_id).nil? && !User.find(user_id).in_use
   end
 
   private
