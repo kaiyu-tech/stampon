@@ -46,7 +46,7 @@
               <span class="span__avatar-text">{{ item.name }}</span>
             </template>
             <template #[`item.text`]="{ item }">
-              <div @click="editClick(item)">
+              <div @click="editClick(item)" class="div__text-link">
                 {{
                   item.text.slice(0, 50) + (item.text.length > 50 ? '...' : '')
                 }}
