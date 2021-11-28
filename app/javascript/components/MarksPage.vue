@@ -9,11 +9,7 @@
               append-icon="mdi-magnify"
               label="Search"></v-text-field>
           </v-card-title>
-          <v-data-table
-            :headers="headers"
-            :items="items"
-            :search="search"
-            @click:row="editClick">
+          <v-data-table :headers="headers" :items="items" :search="search">
             <template #[`item.channels_url`]="{ item }">
               <v-btn
                 icon
@@ -50,9 +46,11 @@
               <span class="span__avatar-text">{{ item.name }}</span>
             </template>
             <template #[`item.text`]="{ item }">
-              {{
-                item.text.slice(0, 50) + (item.text.length > 50 ? '...' : '')
-              }}
+              <div @click="editClick(item)">
+                {{
+                  item.text.slice(0, 50) + (item.text.length > 50 ? '...' : '')
+                }}
+              </div>
             </template>
             <template #[`item.delete`]="{ item }">
               <v-btn small color="error" @click.stop="deleteClick(item)">
