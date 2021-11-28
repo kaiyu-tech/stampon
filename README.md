@@ -12,7 +12,7 @@ Web上に自分のブックマーク管理サイトを持ち、絞り込み検�
 
 ![001](https://user-images.githubusercontent.com/73627898/143539353-a0e6db17-2c5b-433a-bed4-6c2a52f42936.jpg)
 
-2. Discorにログインしてください。
+2. Discordにログインしてください。
 
 ![002](https://user-images.githubusercontent.com/73627898/143539395-f20a2aa8-a461-48b9-98ce-c8f81fd6c426.jpg)
 
