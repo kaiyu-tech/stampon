@@ -31,7 +31,5 @@ module Stampon
     config.active_record.default_timezone = :local
 
     config.generators.template_engine = :slim
-
-    config.eager_load_paths += %W[#{config.root}/lib/utils]
   end
 end
