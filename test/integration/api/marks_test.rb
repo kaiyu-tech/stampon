@@ -3,7 +3,7 @@
 require 'test_helper'
 
 class Api::MarksTest < ActionDispatch::IntegrationTest
-  def setup
+  setup do
     @user = users(:user1)
 
     @api_token = ENV['STAMPON_API_TOKEN']
