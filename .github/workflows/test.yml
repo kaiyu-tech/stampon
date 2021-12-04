@@ -37,7 +37,6 @@ jobs:
           DISCORD_GUILD_ID: ${{ secrets.DISCORD_GUILD_ID }}
           STAMPON_API_TOKEN: ${{ secrets.STAMPON_API_TOKEN }}
         run: |
-          bundle exec bin/webpack-dev-serve
           bundle exec rails db:setup
           bundle exec rails test:all
       - name: Archive screenshot
