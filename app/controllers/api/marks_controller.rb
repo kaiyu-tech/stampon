@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::MarksController < ApplicationController
+class API::MarksController < ApplicationController
   before_action :authentication_required
   protect_from_forgery except: :create
 
