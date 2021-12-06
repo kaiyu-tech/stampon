@@ -5,6 +5,36 @@ require 'net/http'
 require 'json'
 
 module Discord
+  def authorize_url
+    discord_uri = 'https://discord.com/oauth2/authorize'
+    encoded_redirect_uri = URI.encode_www_form_component(redirect_uri)
+    "#{discord_uri}?client_id=#{client_id}&redirect_uri=#{encoded_redirect_uri}&response_type=code&scope=#{scope}"
+  end
+
+  def discord(code)
+    return if code.blank?
+
+    token = token(code)
+    guild = guild(token[:token_type], token[:access_token])
+    return if guild.blank?
+
+    me = me(token[:token_type], token[:access_token])
+    { guild: guild, me: me }
+  end
+
+  def user(discord)
+    user = User.find_or_create_by!(discord_id: discord[:me][:id]) do |v|
+      v.name = discord[:me][:username]
+      v.display_name = discord[:me][:username]
+      v.discriminator = discord[:me][:discriminator]
+      v.avatar = discord[:me][:avatar]
+    end
+    user.update!(admin: discord[:guild][:owner], in_use: true, expires_at: expires_at)
+    user
+  end
+
+  private
+
   def client_id
     ENV['DISCORD_CLIENT_ID']
   end
@@ -29,14 +59,12 @@ module Discord
     ENV['DISCORD_GUILD_ID']
   end
 
-  def parse(res)
-    JSON.parse(res.body)
+  def expires_at
+    Time.current + ENV['STAMPON_EXPIRES_IN']
   end
 
-  def authorize_url
-    discord_uri = 'https://discord.com/oauth2/authorize'
-    encoded_redirect_uri = URI.encode_www_form_component(redirect_uri)
-    "#{discord_uri}?client_id=#{client_id}&redirect_uri=#{encoded_redirect_uri}&response_type=code&scope=#{scope}"
+  def parse(res)
+    JSON.parse(res.body)
   end
 
   def token(code)
@@ -69,31 +97,5 @@ module Discord
       return { id: guild['id'], name: guild['name'], owner: guild['owner'] } if guild['id'].eql?(guild_id)
     end
     nil
-  end
-
-  def discord(code)
-    return if code.blank?
-
-    token = token(code)
-    guild = guild(token[:token_type], token[:access_token])
-    return if guild.blank?
-
-    me = me(token[:token_type], token[:access_token])
-    { guild: guild, me: me }
-  end
-
-  def user(discord)
-    user = User.find_or_create_by!(discord_id: discord[:me][:id]) do |v|
-      v.name = discord[:me][:username]
-      v.display_name = discord[:me][:username]
-      v.discriminator = discord[:me][:discriminator]
-      v.avatar = discord[:me][:avatar]
-    end
-    user.update!(admin: discord[:guild][:owner], in_use: true, expires_at: expires_at)
-    user
-  end
-
-  def expires_at
-    Time.current + ENV['STAMPON_EXPIRES_IN']
   end
 end
