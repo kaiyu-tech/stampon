@@ -65,8 +65,12 @@
     border-radius: 0.5em;
     background-color: #078080;
     color: #ffffff;
-    margin-top: 1.0em;
+    margin-top: 2.0em;
     margin-bottom: 2.0em;
+}
+
+.sessions__catchphrase {
+    font-weight: bold;
 }
 
 .sessions__stamp-kininaru {
@@ -76,4 +80,13 @@
 
 .sessions__stamp-eye {
     font-size: 1.5em;
+}
+
+.sessions__stampon {
+    margin-bottom: 1.5em;
+}
+
+.sessions__usage-scene {
+    margin-top: 1.5em;
+    margin-bottom: 3.0em;
 }

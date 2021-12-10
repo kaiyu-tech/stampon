@@ -1,11 +1,12 @@
 body class='sessions__body'
 
-= image_tag 'logo.svg', size: '280x280', alt: 'StamPon'
+= image_tag 'logo.svg', size: '280x280', alt: 'StamPon', class: 'sessions__stampon'
 
 .content
   p
-    |「すたんぽん」は、Discordの発言をブックマークするサービスです。<br>
-      ブックマークしたい発言に「<font class="sessions__stamp-kininaru">気になる</font>」か「<font class="sessions__stamp-eye">👀</font>」スタンプを押すことで自動登録します。<br>
-      ブックマークした発言は本サイトで検索や削除することが出来ます。
-
-= link_to 'ログイン', url, class: 'btn sessions__login-btn'
+    |<font class="sessions__catchphrase">「すたんぽん」で、Discord上の気になる発言をブックマークしよう！</font><br>
+  = link_to 'Discord でログイン', url, class: 'btn sessions__login-btn'
+  p
+    |ブックマークしたい発言に「<font class="sessions__stamp-kininaru">気になる</font>」か「<font class="sessions__stamp-eye">👀</font>」スタンプを押すことで自動登録します。<br>
+     ブックマークした発言は本サイトで検索や削除することが出来ます。<br>
+  = image_tag 'usage_scene.png', alt: 'usage_scene', class: 'sessions__usage-scene'
