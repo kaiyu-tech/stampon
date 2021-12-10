@@ -7,7 +7,9 @@
 
       <v-spacer></v-spacer>
 
-      {{ user.name }}
+      <span class="span__username-text">
+        {{ user.name }}
+      </span>
 
       <v-menu bottom offset-y rounded>
         <template #activator="{ on }">
