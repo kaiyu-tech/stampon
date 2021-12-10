@@ -9,7 +9,13 @@
               append-icon="mdi-magnify"
               label="Search"></v-text-field>
           </v-card-title>
-          <v-data-table :headers="headers" :items="items" :search="search">
+          <v-data-table
+            :headers="headers"
+            :items="items"
+            :search="search"
+            :footer-props="{
+              'items-per-page-options': [15, 50, 100, -1]
+            }">
             <template #[`item.channels_url`]="{ item }">
               <v-btn
                 icon
