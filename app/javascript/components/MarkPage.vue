@@ -21,9 +21,11 @@
         </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>
-          <v-btn color="error" @click="cancelClick"> キャンセル </v-btn>
+          <v-btn color="default" @click="cancelClick"> キャンセル </v-btn>
           <v-spacer></v-spacer>
-          <v-btn color="primary" @click="updateClick"> 更新 </v-btn>
+          <v-btn color="#078080" @click="updateClick" class="white--text">
+            更新
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-col>
