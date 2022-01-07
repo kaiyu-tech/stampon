@@ -15,7 +15,27 @@
             :search="search"
             :footer-props="{
               'items-per-page-options': [15, 50, 100, -1]
-            }">
+            }"
+            no-data-text="まだデータがありません😢！Discordでブックマーク発言したい発言に「気になる」か「👀」スタンプを押そう！">
+            <template #[`item.name`]="{ item }">
+              <img
+                :src="item.avatars_url"
+                width="30"
+                height="30"
+                class="img__icon img__avatar" />
+            </template>
+            <template #[`item.text`]="{ item }">
+              <div @click="editClick(item)" class="div__text-link">
+                {{
+                  item.text.slice(0, 50) + (item.text.length > 50 ? '...' : '')
+                }}
+              </div>
+            </template>
+            <template #[`item.detail`]="{ item }">
+              <div @click="editClick(item)" class="div__text-link">
+                <v-icon>mdi-note-text-outline</v-icon>
+              </div>
+            </template>
             <template #[`item.channels_url`]="{ item }">
               <v-btn
                 icon
@@ -42,24 +62,12 @@
                   class="img__icon" />
               </v-btn>
             </template>
-            <template #[`item.name`]="{ item }">
-              <img
-                :src="item.avatars_url"
-                width="30"
-                height="30"
-                align="left"
-                class="img__icon img__avatar" />
-              <span class="span__avatar-text">{{ item.name }}</span>
-            </template>
-            <template #[`item.text`]="{ item }">
-              <div @click="editClick(item)" class="div__text-link">
-                {{
-                  item.text.slice(0, 50) + (item.text.length > 50 ? '...' : '')
-                }}
-              </div>
-            </template>
             <template #[`item.delete`]="{ item }">
-              <v-btn small color="error" @click.stop="deleteClick(item)">
+              <v-btn
+                small
+                outlined
+                color="error"
+                @click.stop="deleteClick(item)">
                 削除
               </v-btn>
             </template>
@@ -82,24 +90,29 @@ export default {
       search: '',
       headers: [
         {
-          text: 'リンク',
-          value: 'channels_url',
-          sortable: false,
-          width: '12%'
-        },
-        {
           text: '投稿者',
           value: 'name',
-          width: '18%'
+          width: '8%'
         },
         {
           text: '概要',
           value: 'text'
         },
         {
+          text: '詳細',
+          sortable: false,
+          value: 'detail'
+        },
+        {
+          text: 'リンク',
+          value: 'channels_url',
+          sortable: false,
+          width: '12%'
+        },
+        {
           text: '投稿日時',
           value: 'wrote_at',
-          width: '10%'
+          width: '15%'
         },
         {
           text: '',
