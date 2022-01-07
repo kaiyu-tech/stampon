@@ -3,5 +3,5 @@
 class MarksController < ApplicationController
   before_action :authentication_required
 
-  def main; end
+  def index; end
 end

@@ -14,7 +14,7 @@ class MarksTest < ApplicationSystemTestCase
 
   test 'Success list view test with MarksPage component' do
     ApplicationController.stub_any_instance :session, @session do
-      visit main_path
+      visit marks_path
 
       assert_equal 'StamPon', title
 
@@ -25,7 +25,7 @@ class MarksTest < ApplicationSystemTestCase
   end
 
   test 'Failure list view test with MarksPage component' do
-    visit main_path
+    visit marks_path
 
     assert_equal 'StamPon', title
 
@@ -35,7 +35,7 @@ class MarksTest < ApplicationSystemTestCase
 
   test 'Success test transition to MarkPage component' do
     ApplicationController.stub_any_instance :session, @session do
-      visit main_path
+      visit marks_path
 
       find(:xpath, '//*[@id="app"]//main//table/tbody/tr[1]/td[3]', text: 'title_1').click
 
@@ -48,7 +48,7 @@ class MarksTest < ApplicationSystemTestCase
 
   test 'Success update test with MarkPage component' do
     ApplicationController.stub_any_instance :session, @session do
-      visit main_path
+      visit marks_path
 
       find(:xpath, '//*[@id="app"]//main//table/tbody/tr[1]/td[3]', text: 'title_1').click
 
@@ -73,7 +73,7 @@ class MarksTest < ApplicationSystemTestCase
 
   test 'Success delete test with MarkPage component' do
     ApplicationController.stub_any_instance :session, @session do
-      visit main_path
+      visit marks_path
 
       assert_text 'user_2_nickname'
       assert_text 'title_1'
@@ -90,7 +90,7 @@ class MarksTest < ApplicationSystemTestCase
     ApplicationController.stub_any_instance :session, @session do
       user_id = @session[:user_id]
 
-      visit main_path
+      visit marks_path
 
       find('#user-icon').click
       find('.v-list-item__title', text: 'ログアウト').click
@@ -107,7 +107,7 @@ class MarksTest < ApplicationSystemTestCase
     ApplicationController.stub_any_instance :session, @session do
       user_id = @session[:user_id]
 
-      visit main_path
+      visit marks_path
 
       find('#user-icon').click
       find('.v-list-item__title', text: 'アカウント削除').click
