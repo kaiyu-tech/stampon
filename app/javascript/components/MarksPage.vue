@@ -18,49 +18,87 @@
             }"
             no-data-text="まだデータがありません😢！Discordでブックマーク発言したい発言に「気になる」か「👀」スタンプを押そう！">
             <template #[`item.name`]="{ item }">
-              <img
-                :src="item.avatars_url"
-                width="30"
-                height="30"
-                class="img__icon img__avatar" />
+              <v-tooltip open-delay="150" bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <img
+                    :src="item.avatars_url"
+                    width="30"
+                    height="30"
+                    class="img__icon img__avatar"
+                    v-bind="attrs"
+                    v-on="on" />
+                </template>
+                <span>{{ item.name }}</span>
+              </v-tooltip>
             </template>
             <template #[`item.text`]="{ item }">
-              <div @click="editClick(item)" class="div__text-link">
-                {{
-                  item.text.slice(0, 50) + (item.text.length > 50 ? '...' : '')
-                }}
-              </div>
+              <v-tooltip open-delay="150" bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <div
+                    @click="editClick(item)"
+                    class="div__text-link"
+                    v-bind="attrs"
+                    v-on="on">
+                    {{
+                      item.text.slice(0, 50) +
+                      (item.text.length > 50 ? '...' : '')
+                    }}
+                  </div>
+                </template>
+                <div v-html="replaceNewLine(escapeHTML(item.text))"></div>
+              </v-tooltip>
             </template>
             <template #[`item.detail`]="{ item }">
               <div @click="editClick(item)" class="div__text-link">
-                <v-icon>mdi-note-text-outline</v-icon>
+                <v-tooltip open-delay="150" bottom>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-icon v-bind="attrs" v-on="on">
+                      mdi-note-text-outline
+                    </v-icon>
+                  </template>
+                  <span>詳細を表示</span>
+                </v-tooltip>
               </div>
             </template>
             <template #[`item.channels_url`]="{ item }">
-              <v-btn
-                icon
-                :href="item.channels_url"
-                target="_blank"
-                @click.stop
-                class="v-btn__link">
-                <img
-                  src="assets/chrome.png"
-                  width="30"
-                  height="30"
-                  class="img__icon" />
-              </v-btn>
-              <v-btn
-                icon
-                :href="item.discord_url"
-                target="_blank"
-                @click.stop
-                class="v-btn__link">
-                <img
-                  src="assets/discord.png"
-                  width="30"
-                  height="30"
-                  class="img__icon" />
-              </v-btn>
+              <v-tooltip open-delay="150" bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                    icon
+                    :href="item.channels_url"
+                    target="_blank"
+                    @click.stop
+                    class="v-btn__link"
+                    v-bind="attrs"
+                    v-on="on">
+                    <img
+                      src="assets/chrome.png"
+                      width="30"
+                      height="30"
+                      class="img__icon" />
+                  </v-btn>
+                </template>
+                <span>ブラウザで開く</span>
+              </v-tooltip>
+              <v-tooltip open-delay="150" bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                    icon
+                    :href="item.discord_url"
+                    target="_blank"
+                    @click.stop
+                    class="v-btn__link"
+                    v-bind="attrs"
+                    v-on="on">
+                    <img
+                      src="assets/discord.png"
+                      width="30"
+                      height="30"
+                      class="img__icon" />
+                  </v-btn>
+                </template>
+                <span>Discord Appで開く</span>
+              </v-tooltip>
             </template>
             <template #[`item.delete`]="{ item }">
               <v-btn
@@ -156,6 +194,18 @@ export default {
         this.$emit('delete-click', item.id)
         this.items.splice(this.items.indexOf(item), 1)
       }
+    },
+    escapeHTML(text) {
+      return text
+        .replace(/&/g, '&lt;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#x27;')
+        .replace(/`/g, '&#x60;')
+    },
+    replaceNewLine(text) {
+      return text.replace(/(?:\r\n|\r|\n)/g, '<br />')
     }
   }
 }
