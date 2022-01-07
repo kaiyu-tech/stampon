@@ -35,6 +35,9 @@
     font-weight: bold;
     margin-right: 5px;
 }
+.span__copyright-text {
+    color: #ffffff;
+}
 
 .sessions__body {
     background-color: #f8f5f2;
