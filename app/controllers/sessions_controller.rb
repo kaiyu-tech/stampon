@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       user = user(discord)
       if user.present?
         connect(user.id)
-        redirect_to main_url
+        redirect_to marks_url
       else
         redirect_to root_url
       end
