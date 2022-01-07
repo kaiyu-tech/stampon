@@ -7,7 +7,9 @@
 
       <v-spacer></v-spacer>
 
-      {{ user.name }}
+      <span class="span__username-text">
+        {{ user.name }}
+      </span>
 
       <v-menu bottom offset-y rounded>
         <template #activator="{ on }">
@@ -51,7 +53,9 @@
     </v-main>
     <v-footer color="#078080" absolute>
       <div class="flex-grow-1"></div>
-      <div>&copy; 2021 kaiyu-tech</div>
+      <div>
+        <span class="span__copyright-text">&copy; 2021 kaiyu-tech</span>
+      </div>
     </v-footer>
   </div>
 </template>

@@ -14,7 +14,7 @@
 }
 .img__title {
     vertical-align: middle;
-    height: 45px;
+    height: 38px;
 }
 .v-btn__avatar {
     margin-left: 10px !important;
@@ -29,6 +29,14 @@
 .span__avatar-text {
     display: inline-block;
     margin-top: 5px;
+}
+.span__username-text {
+    color: #ffffff;
+    font-weight: bold;
+    margin-right: 5px;
+}
+.span__copyright-text {
+    color: #ffffff;
 }
 
 .sessions__body {
