@@ -18,7 +18,6 @@ class MarksTest < ApplicationSystemTestCase
 
       assert_equal 'StamPon', title
 
-      assert_text 'user_2_nickname'
       assert_text 'title_1'
       assert_text '削除'
     end
@@ -37,7 +36,7 @@ class MarksTest < ApplicationSystemTestCase
     ApplicationController.stub_any_instance :session, @session do
       visit main_path
 
-      find(:xpath, '//*[@id="app"]//main//table/tbody/tr[1]/td[3]', text: 'title_1').click
+      find(:xpath, '//*[@id="app"]//main//table/tbody/tr/td[2]/div[1]', text: 'title_1').click
 
       assert_field 'タイトル(任意)', with: 'title_1'
       assert_field 'ノート(任意)', with: 'note_1'
@@ -50,7 +49,7 @@ class MarksTest < ApplicationSystemTestCase
     ApplicationController.stub_any_instance :session, @session do
       visit main_path
 
-      find(:xpath, '//*[@id="app"]//main//table/tbody/tr[1]/td[3]', text: 'title_1').click
+      find(:xpath, '//*[@id="app"]//main//table/tbody/tr/td[2]/div[1]', text: 'title_1').click
 
       assert_field 'タイトル(任意)', with: 'title_1'
       assert_field 'ノート(任意)', with: 'note_1'
@@ -62,7 +61,7 @@ class MarksTest < ApplicationSystemTestCase
 
       click_button '更新'
 
-      find(:xpath, '//*[@id="app"]//main//table/tbody/tr[1]/td[3]', text: 'title_1').click
+      find(:xpath, '//*[@id="app"]//main//table/tbody/tr/td[2]/div[1]', text: 'updated_title_1').click
 
       assert_no_field 'タイトル(任意)', with: 'title_1'
       assert_no_field 'ノート(任意)', with: 'note_1'
@@ -75,7 +74,6 @@ class MarksTest < ApplicationSystemTestCase
     ApplicationController.stub_any_instance :session, @session do
       visit main_path
 
-      assert_text 'user_2_nickname'
       assert_text 'title_1'
 
       click_button '削除'
