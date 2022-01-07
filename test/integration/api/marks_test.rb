@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class Api::MarksTest < ActionDispatch::IntegrationTest
+class API::MarksTest < ActionDispatch::IntegrationTest
   setup do
     @user = users(:user1)
 
