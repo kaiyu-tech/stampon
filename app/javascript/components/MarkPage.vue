@@ -8,7 +8,7 @@
             width="50"
             height="50"
             class="img__icon img__avatar" />
-          {{ mark.author.display_name }}
+          {{ mark.author.display_name }} (投稿日時: {{ mark.discord.wrote_at }})
         </v-card-title>
         <v-card-text>
           <v-text-field v-model="title" label="タイトル(任意)"></v-text-field>
