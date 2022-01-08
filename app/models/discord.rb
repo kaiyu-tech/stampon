@@ -22,6 +22,30 @@ module Discord
     { guild: guild, me: me }
   end
 
+  def member(user_id)
+    res = https_get("https://discord.com/api/guilds/#{guild_id}/members/#{user_id}", 'Bot', bot_access_token)
+
+    return if res.code == '404'
+
+    { id: parse(res)['user']['id'], username: parse(res)['user']['username'], display_name: parse(res)['nick'],
+      discriminator: parse(res)['user']['discriminator'], avatar: parse(res)['user']['avatar'] }
+  end
+
+  def message(channel_id, message_id)
+    res = https_get("https://discord.com/api/channels/#{channel_id}/messages/#{message_id}", 'Bot', bot_access_token)
+
+    return if res.code == '404'
+
+    content = parse(res)['content'].gsub(/<(:\w+:)\d{18}>?/) { Regexp.last_match(1) }
+                                   .gsub(/<@?(\d{18})>?/) do
+      "@#{parse(res)['mentions'].find do |user|
+        user['id'] == Regexp.last_match(1)
+      end ['username']}"
+    end
+
+    { channel_id: parse(res)['channel_id'], id: parse(res)['id'], content: content, wrote_at: parse(res)['timestamp'] }
+  end
+
   private
 
   def client_id
@@ -46,6 +70,10 @@ module Discord
 
   def guild_id
     ENV['DISCORD_GUILD_ID']
+  end
+
+  def bot_access_token
+    ENV['DISCORD_BOT_ACCESS_TOKEN']
   end
 
   def expires_at
