@@ -3,19 +3,20 @@
 class SyncData
   include Discord
 
-  def initialize
-  end
+  def initialize; end
 
   def exec
     User.all.each do |v|
       member = member(v[:discord_id])
       next if member.nil?
+
       update_user(member)
     end
 
     Message.all.each do |v|
       message = message(v[:channel_id], v[:content_id])
       next if message.nil?
+
       update_message(message)
     end
   end
