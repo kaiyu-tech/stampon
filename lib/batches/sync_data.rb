@@ -8,6 +8,7 @@ class SyncData
   def exec
     User.all.each do |v|
       member = member(v[:discord_id])
+      sleep 0.300
       next if member.nil?
 
       update_user(member)
@@ -15,6 +16,7 @@ class SyncData
 
     Message.all.each do |v|
       message = message(v[:channel_id], v[:content_id])
+      sleep 0.300
       next if message.nil?
 
       update_message(message)
