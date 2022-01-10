@@ -5,6 +5,9 @@ class API::UsersController < ApplicationController
   protect_from_forgery
 
   def destroy
-    User.destroy(params[:id])
+    user = User.find(params[:id])
+    user.marks.destroy_all
+    # user.messages.destroy_all
+    user.update!(in_use: false)
   end
 end
