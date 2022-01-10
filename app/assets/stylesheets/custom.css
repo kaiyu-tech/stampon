@@ -25,10 +25,10 @@
 }
 .img__avatar {
     margin-right: 10px;
+	vertical-align: middle;
 }
 .span__avatar-text {
-    display: inline-block;
-    margin-top: 5px;
+	vertical-align: middle;
 }
 .span__username-text {
     color: #ffffff;
