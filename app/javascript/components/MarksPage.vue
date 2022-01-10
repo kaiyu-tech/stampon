@@ -194,18 +194,6 @@ export default {
         this.$emit('delete-click', item.id)
         this.items.splice(this.items.indexOf(item), 1)
       }
-    },
-    escapeHTML(text) {
-      return text
-        .replace(/&/g, '&lt;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#x27;')
-        .replace(/`/g, '&#x60;')
-    },
-    replaceNewLine(text) {
-      return text.replace(/(?:\r\n|\r|\n)/g, '<br />')
     }
   }
 }

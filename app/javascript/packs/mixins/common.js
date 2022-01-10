@@ -23,6 +23,24 @@ export default {
       let scheme = 'https://'
       if (app == true) scheme = this.scheme
       return `${scheme}discord.com/channels/${guild_id}/${channel_id}/${content_id}`
+    },
+    escapeHTML(text) {
+      return text
+        .replace(/&/g, '&lt;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#x27;')
+        .replace(/`/g, '&#x60;')
+    },
+    replaceNewLine(text) {
+      return text.replace(/(?:\r\n|\r|\n)/g, '<br />')
+    },
+    replaceUrl(text) {
+      return text.replace(
+        /(https?:\/\/[-_.!~*'()a-zA-Z0-9;/?:@&=+$,%#\u3000-\u30FE\u4E00-\u9FA0\uFF01-\uFFE3]+)/g,
+        "<a href='$1' target='_blank'>$1</a>"
+      )
     }
   }
 }

@@ -75,11 +75,10 @@
         </v-card-title>
         <v-card-text>
           <v-text-field v-model="title" label="タイトル(任意)"></v-text-field>
-          <v-textarea
-            v-model="content"
-            label="内容"
-            filled
-            readonly></v-textarea>
+          <span class="black--text">{{ '内容' }}</span>
+          <div
+            v-html="replaceUrl(replaceNewLine(escapeHTML(content)))"
+            class="black--text div__html"></div>
           <v-textarea v-model="note" label="ノート(任意)"></v-textarea>
         </v-card-text>
         <v-divider></v-divider>
