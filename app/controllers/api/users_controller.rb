@@ -7,7 +7,12 @@ class API::UsersController < ApplicationController
   def destroy
     user = User.find(params[:id])
     user.marks.destroy_all
-    # user.messages.destroy_all
     user.update!(in_use: false)
+    user.messages.each do |message|
+      message.destroy if message.marks.empty?
+    end
+    User.all.each do |user|
+      user.destroy if !user.in_use && user.messages.empty?
+    end
   end
 end
