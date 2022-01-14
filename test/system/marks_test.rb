@@ -21,7 +21,7 @@ class MarksTest < ApplicationSystemTestCase
 
       assert_equal 'StamPon', title
 
-      Timeout.timeout(1) do
+      Timeout.timeout(VUEJS_TIME_OUT) do
         loop until page.has_text?('title_1')
       end
 
