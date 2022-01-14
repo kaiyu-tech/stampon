@@ -81,6 +81,10 @@ class MarksTest < ApplicationSystemTestCase
     ApplicationController.stub_any_instance :session, @session1 do
       visit marks_path
 
+      Timeout.timeout(VUEJS_TIME_OUT) do
+        loop until page.has_text?('title_1')
+      end
+
       assert_text 'title_1'
 
       click_button '削除'
