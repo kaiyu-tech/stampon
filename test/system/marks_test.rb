@@ -22,7 +22,7 @@ class MarksTest < ApplicationSystemTestCase
       assert_equal 'StamPon', title
 
       Timeout.timeout(1) do
-        loop until page.has_text?('title_2')
+        loop until page.has_text?('title_1')
       end
 
       assert_text 'title_1'
