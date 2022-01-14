@@ -39,11 +39,13 @@ class API::MarksController < ApplicationController
   end
 
   def destroy
-    message_id = Mark.find(params[:id]).message_id
-    Mark.destroy(params[:id])
-    user_id = Message.find(message_id).user_id
-    Message.destroy(message_id) if Mark.find_by(message_id: message_id).nil?
-    User.destroy(user_id) if Message.find_by(user_id: user_id).nil? && !User.find(user_id).in_use
+    mark = Mark.find(params[:id])
+    mark.destroy
+    mark.message.destroy if mark.message.marks.empty?
+    # mark.user.destroy if !mark.user.in_use && mark.user.messages.empty?
+    User.all.each do |user|
+      user.destroy if !user.in_use && user.messages.empty?
+    end
   end
 
   private
