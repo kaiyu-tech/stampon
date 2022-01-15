@@ -3,20 +3,82 @@
     <v-col>
       <v-card>
         <v-card-title>
-          <img
-            :src="avatars_url(mark.author.id, mark.author.avatar)"
-            width="50"
-            height="50"
-            class="img__icon img__avatar" />
-          {{ mark.author.display_name }} (投稿日時: {{ mark.discord.wrote_at }})
+          <v-container>
+            <v-row>
+              <v-col cols="10">
+                <img
+                  :src="avatars_url(mark.author.id, mark.author.avatar)"
+                  width="50"
+                  height="50"
+                  class="img__icon img__avatar" />
+                <span class="span__avatar-text"
+                  >{{ mark.author.display_name }} (投稿日時:
+                  {{ mark.discord.wrote_at }})</span
+                >
+              </v-col>
+              <v-col cols="2" align="right">
+                <v-tooltip open-delay="150" bottom>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn
+                      icon
+                      :href="
+                        channels_url(
+                          mark.discord.guild_id,
+                          mark.discord.channel_id,
+                          mark.discord.content_id,
+                          false
+                        )
+                      "
+                      target="_blank"
+                      @click.stop
+                      class="v-btn__link"
+                      v-bind="attrs"
+                      v-on="on">
+                      <img
+                        src="assets/chrome.png"
+                        width="30"
+                        height="30"
+                        class="img__icon" />
+                    </v-btn>
+                  </template>
+                  <span>ブラウザで開く</span>
+                </v-tooltip>
+                <v-tooltip open-delay="150" bottom>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn
+                      icon
+                      :href="
+                        channels_url(
+                          mark.discord.guild_id,
+                          mark.discord.channel_id,
+                          mark.discord.content_id,
+                          true
+                        )
+                      "
+                      target="_blank"
+                      @click.stop
+                      class="v-btn__link"
+                      v-bind="attrs"
+                      v-on="on">
+                      <img
+                        src="assets/discord.png"
+                        width="30"
+                        height="30"
+                        class="img__icon" />
+                    </v-btn>
+                  </template>
+                  <span>Discord Appで開く</span>
+                </v-tooltip>
+              </v-col>
+            </v-row>
+          </v-container>
         </v-card-title>
         <v-card-text>
           <v-text-field v-model="title" label="タイトル(任意)"></v-text-field>
-          <v-textarea
-            v-model="content"
-            label="内容"
-            filled
-            readonly></v-textarea>
+          <span class="black--text">{{ '内容' }}</span>
+          <div
+            v-html="replaceUrl(replaceNewLine(escapeHTML(content)))"
+            class="black--text div__html"></div>
           <v-textarea v-model="note" label="ノート(任意)"></v-textarea>
         </v-card-text>
         <v-divider></v-divider>

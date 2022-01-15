@@ -12,6 +12,11 @@
 .div__text-link {
     cursor: pointer;
 }
+.div__html {
+    background-color: #F0F0F0;
+    padding: 15px;
+    font-size: 1.13em;
+}
 .img__title {
     vertical-align: middle;
     height: 38px;
@@ -25,10 +30,10 @@
 }
 .img__avatar {
     margin-right: 10px;
+	vertical-align: middle;
 }
 .span__avatar-text {
-    display: inline-block;
-    margin-top: 5px;
+	vertical-align: middle;
 }
 .span__username-text {
     color: #ffffff;
