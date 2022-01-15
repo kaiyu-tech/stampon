@@ -1,14 +1,5 @@
 <% now = Time.current %>
 
-message0:
-  channel_id: <%= Faker::Number.number(:digits => 18) %>
-  content_id: <%= Faker::Number.number(:digits => 18) %>
-  content: 'content_0'
-  wrote_at: <%= now %>
-  user: admin
-  created_at: <%= now %>
-  updated_at: <%= now %>
-
 message1:
   channel_id: <%= Faker::Number.number(:digits => 18) %>
   content_id: <%= Faker::Number.number(:digits => 18) %>

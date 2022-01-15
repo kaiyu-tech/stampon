@@ -6,17 +6,24 @@ require 'minitest/stub_any_instance'
 
 class MarksTest < ApplicationSystemTestCase
   setup do
-    @user = users(:user1)
+    @user1 = users(:user1)
+    @user2 = users(:user2)
 
-    @session = { user_id: @user.id }
-    @user.update!(expires_at: Time.current + 3.hours)
+    @session1 = { user_id: @user1.id }
+    @user1.update!(expires_at: Time.current + 3.hours)
+    @session2 = { user_id: @user2.id }
+    @user2.update!(expires_at: Time.current + 3.hours)
   end
 
   test 'Success list view test with MarksPage component' do
-    ApplicationController.stub_any_instance :session, @session do
+    ApplicationController.stub_any_instance :session, @session1 do
       visit marks_path
 
       assert_equal 'StamPon', title
+
+      Timeout.timeout(VUEJS_TIME_OUT) do
+        loop until page.has_text?('title_1')
+      end
 
       assert_text 'title_1'
       assert_text '削除'
@@ -33,7 +40,7 @@ class MarksTest < ApplicationSystemTestCase
   end
 
   test 'Success test transition to MarkPage component' do
-    ApplicationController.stub_any_instance :session, @session do
+    ApplicationController.stub_any_instance :session, @session1 do
       visit marks_path
 
       find(:xpath, '//*[@id="app"]//main//table/tbody/tr/td[2]/div[1]', text: 'title_1').click
@@ -46,7 +53,7 @@ class MarksTest < ApplicationSystemTestCase
   end
 
   test 'Success update test with MarkPage component' do
-    ApplicationController.stub_any_instance :session, @session do
+    ApplicationController.stub_any_instance :session, @session1 do
       visit marks_path
 
       find(:xpath, '//*[@id="app"]//main//table/tbody/tr/td[2]/div[1]', text: 'title_1').click
@@ -71,8 +78,12 @@ class MarksTest < ApplicationSystemTestCase
   end
 
   test 'Success delete test with MarkPage component' do
-    ApplicationController.stub_any_instance :session, @session do
+    ApplicationController.stub_any_instance :session, @session1 do
       visit marks_path
+
+      Timeout.timeout(VUEJS_TIME_OUT) do
+        loop until page.has_text?('title_1')
+      end
 
       assert_text 'title_1'
 
@@ -85,8 +96,8 @@ class MarksTest < ApplicationSystemTestCase
   end
 
   test 'Success logout test' do
-    ApplicationController.stub_any_instance :session, @session do
-      user_id = @session[:user_id]
+    ApplicationController.stub_any_instance :session, @session1 do
+      user_id = @session1[:user_id]
 
       visit marks_path
 
@@ -96,26 +107,44 @@ class MarksTest < ApplicationSystemTestCase
       assert_text 'すたんぽん'
       assert_text 'ログイン'
 
-      assert_nil @session[:user_id]
+      assert_nil @session1[:user_id]
       assert User.find(user_id)
     end
   end
 
   test 'Success delete account test' do
-    # ApplicationController.stub_any_instance :session, @session do
-    #   user_id = @session[:user_id]
+    ApplicationController.stub_any_instance :session, @session1 do
+      user_id = @session1[:user_id]
 
-    #   visit marks_path
+      visit marks_path
 
-    #   find('#user-icon').click
-    #   find('.v-list-item__title', text: 'アカウント削除').click
-    #   page.accept_alert
+      find('#user-icon').click
+      find('.v-list-item__title', text: 'アカウント削除').click
+      page.accept_alert
 
-    #   assert_text 'すたんぽん'
-    #   assert_text 'ログイン'
+      assert_text 'すたんぽん'
+      assert_text 'ログイン'
 
-    #   assert_nil @session[:user_id]
-    #   assert_nil User.find_by(id: user_id)
-    # end
+      assert_nil @session1[:user_id]
+      assert_not User.find_by(id: user_id).in_use
+    end
+    ApplicationController.stub_any_instance :session, @session2 do
+      user2_id = @session2[:user_id]
+
+      visit marks_path
+
+      find('#user-icon').click
+      find('.v-list-item__title', text: 'アカウント削除').click
+      page.accept_alert
+
+      assert_text 'すたんぽん'
+      assert_text 'ログイン'
+
+      assert_nil @session2[:user_id]
+      assert_nil User.find_by(id: user2_id)
+
+      user1_id = @session1[:user_id]
+      assert_nil User.find_by(id: user1_id)
+    end
   end
 end
