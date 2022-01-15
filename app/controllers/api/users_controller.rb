@@ -8,16 +8,17 @@ class API::UsersController < ApplicationController
     user = User.find(params[:id])
     user.marks.destroy_all
     user.update!(in_use: false)
-    user.messages.each do |message|
-      message.destroy if message.marks.empty?
-    end
 
-    remove_unused_users
+    remove_unused_data
   end
 
   private
 
-  def remove_unused_users
+  def remove_unused_data
+    Message.all.each do |message|
+      message.destroy if message.marks.empty?
+    end
+
     User.all.each do |user|
       user.destroy if !user.in_use && user.messages.empty?
     end
