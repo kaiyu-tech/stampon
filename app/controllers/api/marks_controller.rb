@@ -41,11 +41,8 @@ class API::MarksController < ApplicationController
   def destroy
     mark = Mark.find(params[:id])
     mark.destroy
-    mark.message.destroy if mark.message.marks.empty?
-    # mark.user.destroy if !mark.user.in_use && mark.user.messages.empty?
-    User.all.each do |user|
-      user.destroy if !user.in_use && user.messages.empty?
-    end
+
+    remove_unused_data
   end
 
   private
@@ -77,6 +74,16 @@ class API::MarksController < ApplicationController
       v.content = mark_params[:content]
       v.wrote_at = Time.zone.at(mark_params[:wrote_at].to_i / 1000.0)
       v.user = author
+    end
+  end
+
+  def remove_unused_data
+    Message.all.each do |message|
+      message.destroy if message.marks.empty?
+    end
+
+    User.all.each do |user|
+      user.destroy if !user.in_use && user.messages.empty?
     end
   end
 end
