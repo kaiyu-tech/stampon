@@ -30,14 +30,17 @@ class API::UsersTest < ActionDispatch::IntegrationTest
       assert_not user.in_use
     end
     ApplicationController.stub_any_instance :session, @session2 do
-      user_id = @user2.id
+      user2_id = @user2.id
 
-      assert_difference 'User.count', -1 do
-        delete api_user_path(user_id), params: nil, headers: nil
+      assert_difference 'User.count', -2 do
+        delete api_user_path(user2_id), params: nil, headers: nil
       end
       assert_response :success
 
-      assert_not User.find_by(id: user_id)
+      assert_not User.find_by(id: user2_id)
+
+      user1_id = @user1.id
+      assert_not User.find_by(id: user1_id)
     end
   end
 
