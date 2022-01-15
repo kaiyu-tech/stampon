@@ -129,7 +129,7 @@ class MarksTest < ApplicationSystemTestCase
       assert_not User.find_by(id: user_id).in_use
     end
     ApplicationController.stub_any_instance :session, @session2 do
-      user_id = @session2[:user_id]
+      user2_id = @session2[:user_id]
 
       visit marks_path
 
@@ -141,7 +141,10 @@ class MarksTest < ApplicationSystemTestCase
       assert_text 'ログイン'
 
       assert_nil @session2[:user_id]
-      assert_nil User.find_by(id: user_id)
+      assert_nil User.find_by(id: user2_id)
+
+      user1_id = @session1[:user_id]
+      assert_nil User.find_by(id: user1_id)
     end
   end
 end
