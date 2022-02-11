@@ -11,6 +11,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   if HEADED
     driven_by :selenium_chrome, screen_size: [1400, 1400]
   else
-    driven_by :selenium_chrome_headless, screen_size: [1400, 1400], options: { args: ['no-sandbox', 'disable-gpu', 'lang=ja-JP'] }
+    driven_by :selenium_chrome_headless, screen_size: [1400, 1400],
+                                         options: { args: ['no-sandbox', 'disable-gpu', 'lang=ja-JP'] }
   end
 end
