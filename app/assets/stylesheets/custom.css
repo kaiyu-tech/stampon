@@ -111,3 +111,7 @@
     margin-bottom: 3.0em;
     border-radius: 10px;
 }
+
+.v-data-table {
+    word-break: break-all;
+}
