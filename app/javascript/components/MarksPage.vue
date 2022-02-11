@@ -198,9 +198,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.v-data-table {
-  word-break: break-all;
-}
-</style>
