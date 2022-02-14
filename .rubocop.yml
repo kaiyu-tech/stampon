@@ -4,7 +4,7 @@ AllCops:
   NewCops: enable
   Exclude:
     - vendor/**/*
-    - spec/fixtures/**/*
+    - spec/**/*
     - tmp/**/*
     - .git/**/*
     - bin/*
