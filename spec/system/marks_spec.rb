@@ -2,10 +2,6 @@
 
 require 'rails_helper'
 
-# TODO: Temporarily downgrade
-require 'webdrivers/chromedriver'
-Webdrivers::Chromedriver.required_version = '97.0.4692.71'
-
 RSpec.describe 'Marks', type: :system do
   before do
     @user = FactoryBot.create(:user)
