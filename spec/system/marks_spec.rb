@@ -9,12 +9,10 @@ Webdrivers::Chromedriver.required_version = '97.0.4692.71'
 RSpec.describe 'Marks', type: :system do
   before do
     @user = FactoryBot.create(:user)
-    @session0 = { user_id: @user.id }
-    @user.update!(expires_at: Time.current + 3.hours)
   end
 
   scenario 'Log in to view the bookmarks list page', js: true do
-    allow_any_instance_of(ActionDispatch::Request).to receive(:session).and_return(@session0)
+    sign_in_as(@user)
 
     visit marks_path
 
@@ -33,9 +31,8 @@ RSpec.describe 'Marks', type: :system do
 
   scenario 'Click on the summary to display the bookmark details page', js: true do
     mark = FactoryBot.create(:mark0)
-    mark.user.update!(expires_at: Time.current + 3.hours)
 
-    allow_any_instance_of(ActionDispatch::Request).to receive(:session).and_return({ user_id: mark.user.id })
+    sign_in_as(mark.user)
 
     visit marks_path
 
@@ -50,9 +47,8 @@ RSpec.describe 'Marks', type: :system do
 
   scenario 'Edit the title and note on the bookmark detail page', js: true do
     mark = FactoryBot.create(:mark0)
-    mark.user.update!(expires_at: Time.current + 3.hours)
 
-    allow_any_instance_of(ActionDispatch::Request).to receive(:session).and_return({ user_id: mark.user.id })
+    sign_in_as(mark.user)
 
     visit marks_path
 
@@ -78,9 +74,8 @@ RSpec.describe 'Marks', type: :system do
 
   scenario 'Delete bookmarks', js: true do
     mark = FactoryBot.create(:mark0)
-    mark.user.update!(expires_at: Time.current + 3.hours)
 
-    allow_any_instance_of(ActionDispatch::Request).to receive(:session).and_return({ user_id: mark.user.id })
+    sign_in_as(mark.user)
 
     visit marks_path
 
@@ -94,9 +89,9 @@ RSpec.describe 'Marks', type: :system do
   end
 
   scenario 'Logging out', js: true do
-    allow_any_instance_of(ActionDispatch::Request).to receive(:session).and_return(@session0)
+    session = sign_in_as(@user)
 
-    user_id = @session0[:user_id]
+    user_id = session[:user_id]
 
     visit marks_path
 
@@ -106,7 +101,7 @@ RSpec.describe 'Marks', type: :system do
     expect(page).to have_content 'すたんぽん'
     expect(page).to have_content 'Discord でログイン'
 
-    assert_nil @session0[:user_id]
+    assert_nil session[:user_id]
     assert User.find(user_id)
   end
 
@@ -115,9 +110,9 @@ RSpec.describe 'Marks', type: :system do
     message = FactoryBot.create(:message0, user: @user)
     FactoryBot.create(:mark0, user: other_user, message: message)
 
-    allow_any_instance_of(ActionDispatch::Request).to receive(:session).and_return(@session0)
+    session0 = sign_in_as(@user)
 
-    user_id = @session0[:user_id]
+    user_id = session0[:user_id]
 
     visit marks_path
 
@@ -128,13 +123,10 @@ RSpec.describe 'Marks', type: :system do
     expect(page).to have_content 'すたんぽん'
     expect(page).to have_content 'Discord でログイン'
 
-    expect(@session0[:user_id]).to be_nil
+    expect(session0[:user_id]).to be_nil
     expect(User.find_by(id: user_id).in_use).to be false
 
-    session1 = { user_id: other_user.id }
-    other_user.update!(expires_at: Time.current + 3.hours)
-
-    allow_any_instance_of(ActionDispatch::Request).to receive(:session).and_return(session1)
+    session1 = sign_in_as(other_user)
 
     other_user_id = session1[:user_id]
 
