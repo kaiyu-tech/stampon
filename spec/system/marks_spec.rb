@@ -151,8 +151,5 @@ RSpec.describe 'Marks', type: :system do
     expect(User.find_by(id: other_user_id)).to be_nil
 
     expect(User.find_by(id: user_id)).to be_nil
-
-    expect(Message.all).to be_empty
-    expect(Mark.all).to be_empty
   end
 end
