@@ -10,10 +10,10 @@ class API::UsersTest < ActionDispatch::IntegrationTest
     @api_token = ENV['STAMPON_API_TOKEN']
 
     @session1 = { user_id: @user1.id }
-    @user1.update!(expires_at: Time.current + 3.hours)
+    @user1.update!(expires_at: 3.hours.from_now)
 
     @session2 = { user_id: @user2.id }
-    @user2.update!(expires_at: Time.current + 3.hours)
+    @user2.update!(expires_at: 3.hours.from_now)
   end
 
   test 'DELETE /api/users/:id with session' do

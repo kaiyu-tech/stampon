@@ -10,7 +10,7 @@ class API::MarksTest < ActionDispatch::IntegrationTest
     @invalid_api_token = 'acCeSS_10KEn-uNS10pa61E_tuKE.3Zu'
 
     @session = { user_id: @user.id }
-    @user.update!(expires_at: Time.current + 3.hours)
+    @user.update!(expires_at: 3.hours.from_now)
 
     @discord_params = discord_params
   end
