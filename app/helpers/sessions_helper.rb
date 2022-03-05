@@ -17,7 +17,7 @@ module SessionsHelper
   end
 
   def authentication_required
-    connected? || authenticate || respond_unauthorized
+    (!create_mark? && connected?) || authenticate || respond_unauthorized
   end
 
   private
@@ -32,7 +32,7 @@ module SessionsHelper
   end
 
   def authenticate
-    action_name == 'create' &&
+    create_mark? &&
       authenticate_with_http_token do |token, _options|
         ActiveSupport::SecurityUtils.secure_compare(token, stampon_api_token)
       end
@@ -43,5 +43,9 @@ module SessionsHelper
       format.html { redirect_to root_url, alert: 'access denied' }
       format.json { render json: { message: 'token invalid' }, status: :unauthorized }
     end
+  end
+
+  def create_mark?
+    controller_name == 'marks' && action_name == 'create'
   end
 end
