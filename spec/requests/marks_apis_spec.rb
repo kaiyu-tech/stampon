@@ -38,7 +38,7 @@ RSpec.describe 'Marks API', type: :request do
         FactoryBot.create(:mark0, user: @user)
         FactoryBot.create(:mark1, user: @user)
 
-        sign_in_as(@user)
+        sign_in_as(@user) { get root_path }
 
         get api_marks_path, params: nil, headers: nil
         expect(response).to have_http_status(:success)
@@ -75,7 +75,7 @@ RSpec.describe 'Marks API', type: :request do
       it 'ブックマーク詳細を取得できること' do
         FactoryBot.create(:mark0, user: @user)
 
-        sign_in_as(@user)
+        sign_in_as(@user) { get root_path }
 
         get edit_api_mark_path(@user.marks.first), params: nil, headers: nil
         expect(response).to have_http_status(:success)
@@ -121,7 +121,7 @@ RSpec.describe 'Marks API', type: :request do
       it 'ブックマークを追加できないこと' do
         FactoryBot.create(:mark0, user: @user)
 
-        sign_in_as(@user)
+        sign_in_as(@user) { get root_path }
 
         post api_marks_path, params: @discord_params, headers: nil
         expect(response).to have_http_status(:unauthorized)
@@ -144,7 +144,7 @@ RSpec.describe 'Marks API', type: :request do
       it 'ブックマークを編集できること' do
         FactoryBot.create(:mark0, user: @user)
 
-        sign_in_as(@user)
+        sign_in_as(@user) { get root_path }
 
         mark = @user.marks.first
 
@@ -180,7 +180,7 @@ RSpec.describe 'Marks API', type: :request do
       it 'ブックマークを削除できること' do
         FactoryBot.create(:mark0, user: @user)
 
-        sign_in_as(@user)
+        sign_in_as(@user) { get root_path }
 
         mark = @user.marks.first
 

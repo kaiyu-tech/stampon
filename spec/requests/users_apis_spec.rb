@@ -10,7 +10,7 @@ RSpec.describe 'Users API', type: :request do
   describe 'ユーザーを削除する' do
     context 'ユーザーのメッセージがブックマークされていない時' do
       it 'ユーザーを削除できること' do
-        sign_in_as(@user)
+        sign_in_as(@user) { get root_path }
 
         user_id = @user.id
 
@@ -27,7 +27,7 @@ RSpec.describe 'Users API', type: :request do
         message = FactoryBot.create(:message0, user: @user)
         FactoryBot.create(:mark0, user: other_user, message: message)
 
-        sign_in_as(@user)
+        sign_in_as(@user) { get root_path }
 
         delete api_user_path(@user), params: nil, headers: nil
         expect(response).to have_http_status(:success)
