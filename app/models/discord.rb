@@ -27,7 +27,7 @@ class Discord
       Time.current + expires_in
     end
 
-  private
+    private
 
     def member(user_id)
       res = https_get("https://discord.com/api/guilds/#{guild_id}/members/#{user_id}", 'Bot', bot_access_token)
@@ -121,5 +121,5 @@ class Discord
       end
       nil
     end
-end
+  end
 end
