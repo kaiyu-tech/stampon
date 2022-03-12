@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 class SessionsController < ApplicationController
+  include Discord
+
   def new
-    info = Discord.connect(params[:code])
-    if info.present?
-      user = update_user(info)
+    discord = discord(params[:code])
+    if discord.present?
+      user = user(discord)
       if user.present?
         connect(user.id)
         redirect_to marks_url
@@ -13,20 +15,20 @@ class SessionsController < ApplicationController
       end
     else
       disconnect
-      render 'new', locals: { url: Discord.authorize_url }
+      render 'new', locals: { url: authorize_url }
     end
   end
 
   private
 
-  def update_user(info)
-    user = User.find_or_create_by!(discord_id: info[:me][:id]) do |v|
-      v.name = info[:me][:username]
-      v.display_name = info[:me][:username]
-      v.discriminator = info[:me][:discriminator]
-      v.avatar = info[:me][:avatar]
+  def user(discord)
+    user = User.find_or_create_by!(discord_id: discord[:me][:id]) do |v|
+      v.name = discord[:me][:username]
+      v.display_name = discord[:me][:username]
+      v.discriminator = discord[:me][:discriminator]
+      v.avatar = discord[:me][:avatar]
     end
-    user.update!(admin: info[:guild][:owner], in_use: true, expires_at: Discord.expires_at)
+    user.update!(admin: discord[:guild][:owner], in_use: true, expires_at: expires_at)
     user
   end
 end

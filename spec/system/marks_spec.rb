@@ -8,7 +8,7 @@ RSpec.describe 'Marks', type: :system do
   end
 
   scenario 'Log in to view the bookmarks list page', js: true do
-    sign_in_as(@user) { visit root_path }
+    sign_in_as(@user)
 
     visit marks_path
 
@@ -28,7 +28,7 @@ RSpec.describe 'Marks', type: :system do
   scenario 'Click on the summary to display the bookmark details page', js: true do
     mark = FactoryBot.create(:mark0)
 
-    sign_in_as(mark.user) { visit root_path }
+    sign_in_as(mark.user)
 
     visit marks_path
 
@@ -44,7 +44,7 @@ RSpec.describe 'Marks', type: :system do
   scenario 'Edit the title and note on the bookmark detail page', js: true do
     mark = FactoryBot.create(:mark0)
 
-    sign_in_as(mark.user) { visit root_path }
+    sign_in_as(mark.user)
 
     visit marks_path
 
@@ -71,7 +71,7 @@ RSpec.describe 'Marks', type: :system do
   scenario 'Delete bookmarks', js: true do
     mark = FactoryBot.create(:mark0)
 
-    sign_in_as(mark.user) { visit root_path }
+    sign_in_as(mark.user)
 
     visit marks_path
 
@@ -85,7 +85,9 @@ RSpec.describe 'Marks', type: :system do
   end
 
   scenario 'Logging out', js: true do
-    sign_in_as(@user) { visit root_path }
+    session = sign_in_as(@user)
+
+    user_id = session[:user_id]
 
     visit marks_path
 
@@ -95,7 +97,8 @@ RSpec.describe 'Marks', type: :system do
     expect(page).to have_content 'すたんぽん'
     expect(page).to have_content 'Discord でログイン'
 
-    assert User.find(@user.id)
+    assert_nil session[:user_id]
+    assert User.find(user_id)
   end
 
   scenario 'Delete user account', js: true do
@@ -103,7 +106,9 @@ RSpec.describe 'Marks', type: :system do
     message = FactoryBot.create(:message0, user: @user)
     FactoryBot.create(:mark0, user: other_user, message: message)
 
-    sign_in_as(@user) { visit root_path }
+    session0 = sign_in_as(@user)
+
+    user_id = session0[:user_id]
 
     visit marks_path
 
@@ -114,9 +119,12 @@ RSpec.describe 'Marks', type: :system do
     expect(page).to have_content 'すたんぽん'
     expect(page).to have_content 'Discord でログイン'
 
-    expect(User.find_by(id: @user.id).in_use).to be false
+    expect(session0[:user_id]).to be_nil
+    expect(User.find_by(id: user_id).in_use).to be false
 
-    sign_in_as(other_user) { visit root_path }
+    session1 = sign_in_as(other_user)
+
+    other_user_id = session1[:user_id]
 
     visit marks_path
 
@@ -127,8 +135,9 @@ RSpec.describe 'Marks', type: :system do
     expect(page).to have_content 'すたんぽん'
     expect(page).to have_content 'Discord でログイン'
 
-    expect(User.find_by(id: other_user.id)).to be_nil
+    expect(session1[:user_id]).to be_nil
+    expect(User.find_by(id: other_user_id)).to be_nil
 
-    expect(User.find_by(id: @user.id)).to be_nil
+    expect(User.find_by(id: user_id)).to be_nil
   end
 end
