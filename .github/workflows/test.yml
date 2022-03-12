@@ -36,7 +36,6 @@ jobs:
           DISCORD_SCOPE: ${{ secrets.DISCORD_SCOPE }}
           DISCORD_GUILD_ID: ${{ secrets.DISCORD_GUILD_ID }}
           STAMPON_API_TOKEN: ${{ secrets.STAMPON_API_TOKEN }}
-          STAMPON_EXPIRES_IN: ${{ secrets.STAMPON_EXPIRES_IN }}
         run: |
           bundle exec rails db:setup
           bundle exec rails test:all
